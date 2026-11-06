@@ -1,0 +1,271 @@
+/* ==================================================
+   FORM CREATE PRESTASI
+================================================== */
+
+.form-card {
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto 0;
+    padding: 36px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07);
+}
+
+.form-card form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+    margin: 0;
+}
+
+.form-group label {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    outline: none;
+    background: #ffffff;
+    color: #1e293b;
+    font-size: 15px;
+    line-height: 1.5;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+.form-group textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #94a3b8;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #C9A227;
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.12);
+}
+
+.form-group:has(input[name="nama_prestasi"]),
+.form-group:has(input[name="penyelenggara"]),
+.form-group:has(textarea) {
+    grid-column: 1 / -1;
+}
+
+.form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 22px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.form-actions .btn {
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 22px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.form-actions .btn-primary {
+    background: #C9A227;
+    color: #ffffff;
+}
+
+.form-actions .btn-primary:hover {
+    background: #B58B16;
+    transform: translateY(-1px);
+}
+
+.form-actions .btn-secondary {
+    background: #ffffff;
+    border-color: #cbd5e1;
+    color: #475569;
+}
+
+.form-actions .btn-secondary:hover {
+    background: #f1f5f9;
+}
+
+.alert {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 16px 20px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.alert ul {
+    margin: 8px 0 0 20px;
+}
+
+.alert-success {
+    border-color: #a7f3d0;
+    background: #ecfdf5;
+    color: #065f46;
+}
+
+.alert-error {
+    border-color: #fecaca;
+    background: #fef2f2;
+    color: #991b1b;
+}
+
+.section-heading h1 {
+    letter-spacing: -0.8px;
+}
+
+.section-heading p {
+    max-width: 700px;
+}
+
+@media (max-width: 700px) {
+    .form-card {
+        margin-top: 22px;
+        padding: 22px;
+        border-radius: 14px;
+    }
+
+    .form-card form {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .form-group:has(input[name="nama_prestasi"]),
+    .form-group:has(input[name="penyelenggara"]),
+    .form-group:has(textarea),
+    .form-actions {
+        grid-column: 1;
+    }
+
+    .form-actions {
+        justify-content: stretch;
+    }
+
+    .form-actions .btn {
+        flex: 1;
+    }
+
+    .section-heading h1 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 420px) {
+    .form-card {
+        padding: 17px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+        flex: auto;
+    }
+}
+
+.about-section {
+    padding: 32px 36px;
+}
+
+.about-hero {
+    max-width: 1000px;
+    margin-bottom: 28px;
+}
+
+.about-hero h1 {
+    max-width: 1000px;
+    margin: 18px 0;
+    color: #202C43;
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.3;
+}
+
+.about-hero p,
+.about-card p {
+    color: #475569;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.about-card {
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(15, 23, 42, 0.04);
+}
+
+.about-card h2 {
+    margin: 0 0 12px;
+    color: #202C43;
+    font-size: 22px;
+}
+
+.about-card p {
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .about-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .about-section {
+        padding: 24px 18px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+}
