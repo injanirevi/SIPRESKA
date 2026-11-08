@@ -1,0 +1,72 @@
+<mxfile host="app.diagrams.net" agent="SIPRESKA">
+  <diagram id="erd-sipreska-diagram" name="ERD Database SIPRESKA">
+    <mxGraphModel dx="1868" dy="1107" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="erd_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#2D1B4E;" value="Entity-Relationship Diagram (ERD) Basis Data SIPRESKA (MySQL)" vertex="1">
+          <mxGeometry height="35" width="700" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="t_users" parent="1" style="swimlane;fontStyle=1;align=left;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#5B3A8E;fontColor=#000000;strokeColor=#432765;fontSize=12;rounded=1;" value="users&#xa;+ id : BIGINT (PK)&#xa;  name : VARCHAR(255)&#xa;  email : VARCHAR(255)&#xa;  password : VARCHAR(255)&#xa;  role : ENUM(super_admin, admin, dosen, mahasiswa)&#xa;  nim_nip : VARCHAR(50)&#xa;  created_at : TIMESTAMP" vertex="1">
+          <mxGeometry height="150" width="290" x="110" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="t_sivitas" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#5B3A8E;fontColor=#000000;strokeColor=#432765;fontSize=12;rounded=1;" value="sivitas&#xa;+ id : BIGINT (PK)&#xa;* user_id : BIGINT (FK)&#xa;  nama : VARCHAR(255)&#xa;  email : VARCHAR(255)&#xa;  nim_nip : VARCHAR(50)&#xa;  program_studi : VARCHAR(100)&#xa;  fakultas : VARCHAR(100)&#xa;  jenis_sivitas : ENUM(mahasiswa, dosen)" vertex="1">
+          <mxGeometry height="165" width="290" x="40" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="t_admins" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#5B3A8E;fontColor=#FFFFFF;strokeColor=#432765;fontSize=12;rounded=1;" value="admins&#xa;+ id : BIGINT (PK)&#xa;* user_id : BIGINT (FK)&#xa;  nama : VARCHAR(255)&#xa;  nip : VARCHAR(50)&#xa;  bagian : VARCHAR(100)" vertex="1">
+          <mxGeometry height="115" width="290" x="40" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="t_anggota" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#5B3A8E;fontColor=#000000;strokeColor=#432765;fontSize=12;rounded=1;" value="anggota_prestasis&#xa;+ id : BIGINT (PK)&#xa;* prestasi_id : BIGINT (FK)&#xa;* sivitas_id : BIGINT (FK)&#xa;  peran : ENUM(pengaju, anggota)&#xa;  nama : VARCHAR(255)&#xa;  nim_nip : VARCHAR(50)&#xa;  peran_anggota : VARCHAR(100)" vertex="1">
+          <mxGeometry height="150" width="260" x="430" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="t_prestasis" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#2D1B4E;fontColor=#000000;strokeColor=#1F1335;fontSize=12;rounded=1;" value="prestasis&#xa;+ id : BIGINT (PK)&#xa;* kategori_id : BIGINT (FK)&#xa;* tingkat_id : BIGINT (FK)&#xa;  nama_prestasi : VARCHAR(255)&#xa;  jenis_prestasi : ENUM(individu, kelompok)&#xa;  peringkat : VARCHAR(50)&#xa;  penyelenggara : VARCHAR(255)&#xa;  tahun : YEAR&#xa;  deskripsi : TEXT&#xa;  status : ENUM(menunggu_verifikasi,&#xa;               disetujui, ditolak, perlu_perbaikan)" vertex="1">
+          <mxGeometry height="235" width="280" x="780" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="t_kategori" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#5B3A8E;fontColor=#FFFFFF;strokeColor=#432765;fontSize=12;rounded=1;" value="kategori_prestasis&#xa;+ id : BIGINT (PK)&#xa;  nama_kategori : VARCHAR(100)&#xa;  deskripsi : TEXT" vertex="1">
+          <mxGeometry height="95" width="230" x="780" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="t_tingkat" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#5B3A8E;fontColor=#FFFFFF;strokeColor=#432765;fontSize=12;rounded=1;" value="tingkat_prestasis&#xa;+ id : BIGINT (PK)&#xa;  nama_tingkat : VARCHAR(100)&#xa;  bobot : INT" vertex="1">
+          <mxGeometry height="95" width="210" x="1080" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="t_bukti" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#5B3A8E;fontColor=#FFFFFF;strokeColor=#432765;fontSize=12;rounded=1;" value="bukti_prestasis&#xa;+ id : BIGINT (PK)&#xa;* prestasi_id : BIGINT (FK)&#xa;  jenis_bukti : ENUM(sertifikat,&#xa;                    dokumentasi, sk)&#xa;  path_file : VARCHAR(255)&#xa;  nama_file : VARCHAR(255)" vertex="1">
+          <mxGeometry height="135" width="210" x="1100" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="t_verifikasis" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#5B3A8E;fontColor=#FFFFFF;strokeColor=#432765;fontSize=12;rounded=1;" value="verifikasis&#xa;+ id : BIGINT (PK)&#xa;* prestasi_id : BIGINT (FK)&#xa;* admin_id : BIGINT (FK)&#xa;  tanggal_verifikasi : TIMESTAMP&#xa;  status_verifikasi : ENUM(disetujui, ditolak)&#xa;  catatan : TEXT" vertex="1">
+          <mxGeometry height="140" width="280" x="780" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_users_sivitas" edge="1" parent="1" source="t_users" style="edgeStyle=none;rounded=0;html=1;endArrow=ERoneToMany;strokeColor=#2D1B4E;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#2D1B4E;" target="t_sivitas" value="1 : 0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_users_admins" edge="1" parent="1" source="t_users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERoneToMany;strokeColor=#2D1B4E;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#2D1B4E;" target="t_admins" value="1 : 0..1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="20" y="160" />
+              <mxPoint x="20" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_sivitas_anggota" edge="1" parent="1" source="t_sivitas" style="edgeStyle=none;rounded=0;html=1;endArrow=ERmandMany;strokeColor=#2D1B4E;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#2D1B4E;" target="t_anggota" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_prestasi_anggota" edge="1" parent="1" source="t_prestasis" style="edgeStyle=none;rounded=0;html=1;endArrow=ERmandMany;strokeColor=#2D1B4E;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#2D1B4E;" target="t_anggota" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_kategori_prestasi" edge="1" parent="1" source="t_kategori" style="edgeStyle=none;rounded=0;html=1;endArrow=ERmandMany;strokeColor=#2D1B4E;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#2D1B4E;" target="t_prestasis" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_tingkat_prestasi" edge="1" parent="1" source="t_tingkat" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERmandMany;strokeColor=#2D1B4E;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#2D1B4E;" target="t_prestasis" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_prestasi_bukti" edge="1" parent="1" source="t_prestasis" style="edgeStyle=none;rounded=0;html=1;endArrow=ERmandMany;strokeColor=#2D1B4E;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#2D1B4E;" target="t_bukti" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_prestasi_verifikasi" edge="1" parent="1" source="t_prestasis" style="edgeStyle=none;rounded=0;html=1;endArrow=ERmandMany;strokeColor=#2D1B4E;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#2D1B4E;" target="t_verifikasis" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_admin_verifikasi" edge="1" parent="1" source="t_admins" style="edgeStyle=none;rounded=0;html=1;endArrow=ERmandMany;strokeColor=#2D1B4E;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#2D1B4E;" target="t_verifikasis" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

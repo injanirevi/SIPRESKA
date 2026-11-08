@@ -1,134 +1,152 @@
 @extends('layouts.app')
 
-@section('title', 'Panduan Penggunaan App - SIPRESKA')
+@section('title', 'Panduan Penggunaan - SIPRESKA')
 
 @section('content')
 <div class="guide-page">
 
+    {{-- HERO HEADER --}}
     <header class="guide-hero">
-        <span class="guide-eyebrow">PANDUAN PENGGUNA</span>
+        <span class="guide-eyebrow">PUSAT PANDUAN SIVITAS AKADEMIKA</span>
         <h1>Panduan Penggunaan <span>SIPRESKA</span></h1>
         <p>
-            Pelajari cara menggunakan SIPRESKA untuk melihat prestasi,
-            mengajukan pencapaian, dan memantau hasil verifikasi.
+            Panduan lengkap bagi Mahasiswa dan Dosen untuk mendokumentasikan pencapaian, mengajukan data prestasi, melampirkan berkas bukti yang sah, serta memantau status telaah verifikasi.
         </p>
     </header>
 
+    {{-- 6 LANGKAH PENGGUNAAN --}}
     <section class="guide-section">
         <div class="guide-section-heading">
-            <div>
-                <span class="guide-kicker">MULAI DI SINI</span>
-                <h2>Langkah Penggunaan</h2>
-                <p>Ikuti tahapan berikut sesuai kebutuhanmu.</p>
-            </div>
+            <span class="guide-kicker">TAHAPAN SISTEM</span>
+            <h2>6 Langkah Mudah Pengelolaan Prestasi</h2>
+            <p>Ikuti tahapan berikut mulai dari eksplorasi data hingga pengajuan mandiri.</p>
         </div>
 
         <div class="guide-grid">
 
             <article class="guide-card">
-                <span class="guide-number">01</span>
-                <div class="guide-icon">⌂</div>
-                <h3>Dashboard</h3>
+                <div class="guide-card-top">
+                    <div class="guide-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    </div>
+                    <span class="guide-number">Tahap 01</span>
+                </div>
+                <h3>Dashboard Mandiri</h3>
                 <p>
-                    Buka Dashboard untuk melihat ringkasan prestasi,
-                    jumlah pengajuan, dan informasi yang tersedia
-                    untuk akunmu.
+                    Akses Dashboard untuk memantau ringkasan seluruh pengajuan yang pernah Anda kirim, jumlah prestasi yang disetujui, dan pengajuan yang masih dalam proses verifikasi.
                 </p>
             </article>
 
             <article class="guide-card">
-                <span class="guide-number">02</span>
-                <div class="guide-icon">▤</div>
-                <h3>Daftar Prestasi</h3>
+                <div class="guide-card-top">
+                    <div class="guide-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    </div>
+                    <span class="guide-number">Tahap 02</span>
+                </div>
+                <h3>Eksplorasi Prestasi</h3>
                 <p>
-                    Gunakan halaman Daftar Prestasi untuk mencari
-                    prestasi mahasiswa berdasarkan nama, tingkat,
-                    dan tahun perolehan.
+                    Jelajahi portofolio pencapaian kampus di halaman Daftar Prestasi. Cari berdasarkan nama rekan sivitas, tingkat kompetisi, tahun lomba, atau kategori bidang.
                 </p>
             </article>
 
             <article class="guide-card">
-                <span class="guide-number">03</span>
-                <div class="guide-icon">＋</div>
-                <h3>Pengajuan Prestasi</h3>
+                <div class="guide-card-top">
+                    <div class="guide-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                    </div>
+                    <span class="guide-number">Tahap 03</span>
+                </div>
+                <h3>Formulir Pengajuan</h3>
                 <p>
-                    Lengkapi kategori, tingkat, nama prestasi,
-                    jenis pencapaian, tahun, dan penyelenggara.
-                    Pastikan data sesuai sebelum mengirim.
+                    Klik tombol <strong>Ajukan Prestasi</strong>. Isi data secara lengkap: nama kompetisi, capaian juara, kategori (Akademik/Non-Akademik), tingkat kompetisi, tahun, dan pihak penyelenggara.
                 </p>
             </article>
 
             <article class="guide-card">
-                <span class="guide-number">04</span>
-                <div class="guide-icon">♧</div>
-                <h3>Anggota Tim</h3>
+                <div class="guide-card-top">
+                    <div class="guide-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <span class="guide-number">Tahap 04</span>
+                </div>
+                <h3>Keanggotaan Tim</h3>
                 <p>
-                    Untuk prestasi tim, pilih jenis Tim dan tambahkan
-                    nama serta NIM anggota lain sesuai profil yang
-                    terdaftar di sistem.
+                    Untuk prestasi beregu/kelompok, pilih tipe <em>Tim</em> lalu tambahkan nama dan NIM/NIP anggota tim lainnya. Sistem akan otomatis menghubungkan portofolio ke seluruh anggota.
                 </p>
             </article>
 
             <article class="guide-card">
-                <span class="guide-number">05</span>
-                <div class="guide-icon">◎</div>
-                <h3>Bukti Prestasi</h3>
+                <div class="guide-card-top">
+                    <div class="guide-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    </div>
+                    <span class="guide-number">Tahap 05</span>
+                </div>
+                <h3>Unggah Berkas Bukti</h3>
                 <p>
-                    Unggah sertifikat dan dokumentasi prestasi sesuai
-                    ketentuan formulir. Surat Keputusan (SK) dapat
-                    disertakan sebagai dokumen tambahan.
+                    Lampirkan file bukti digital resmi berupa scan sertifikat/piagam, dokumentasi foto penyerahan penghargaan, dan Surat Keputusan (SK) tugas jika ada. Pastikan file terbaca dengan jelas.
                 </p>
             </article>
 
             <article class="guide-card">
-                <span class="guide-number">06</span>
-                <div class="guide-icon">✓</div>
-                <h3>Verifikasi</h3>
+                <div class="guide-card-top">
+                    <div class="guide-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    </div>
+                    <span class="guide-number">Tahap 06</span>
+                </div>
+                <h3>Proses Verifikasi</h3>
                 <p>
-                    Setelah pengajuan dikirim, admin akan memeriksanya.
-                    Pantau status pengajuan dan tindak lanjuti jika
-                    ada permintaan perbaikan.
+                    Setelah pengajuan terkirim, berkas akan diperiksa oleh Administrator. Pantau perubahan status secara berkala. Prestasi yang disetujui akan langsung diterbitkan ke portofolio kampus.
                 </p>
             </article>
 
         </div>
     </section>
 
+    {{-- STATUS PENGAJUAN --}}
     <section class="guide-status-panel">
-        <span class="guide-kicker">STATUS PENGAJUAN</span>
-        <h2>Kenali Status Prestasimu</h2>
+        <span class="guide-kicker">INFORMASI STATUS</span>
+        <h2>Kenali Status Pengajuan Anda</h2>
+        <p style="margin: 0 0 18px; color: var(--guide-muted); font-size: 13px;">Setiap pengajuan yang Anda kirimkan akan melalui tahapan evaluasi dengan status sebagai berikut:</p>
 
         <div class="guide-status-list">
             <div class="guide-status-row">
-                <span class="guide-status-badge pending">Menunggu Verifikasi</span>
-                <p>Pengajuan sudah diterima dan menunggu pemeriksaan admin.</p>
+                <span class="guide-status-badge pending">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    Menunggu Verifikasi
+                </span>
+                <p>Pengajuan telah berhasil masuk ke database dan sedang berada dalam antrean peninjauan oleh tim administrator kampus.</p>
             </div>
 
             <div class="guide-status-row">
-                <span class="guide-status-badge approved">Disetujui</span>
-                <p>Pengajuan telah disetujui dan dapat ditampilkan pada daftar publik sesuai aturan sistem.</p>
+                <span class="guide-status-badge approved">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Prestasi Disetujui
+                </span>
+                <p>Berkas telah divalidasi keabsahannya. Prestasi resmi tercatat di SIPRESKA dan tampil pada halaman pencarian publik serta profil sivitas.</p>
             </div>
 
             <div class="guide-status-row">
-                <span class="guide-status-badge revision">Perlu Perbaikan</span>
-                <p>Periksa kembali informasi atau bukti yang perlu dilengkapi.</p>
-            </div>
-
-            <div class="guide-status-row">
-                <span class="guide-status-badge rejected">Ditolak</span>
-                <p>Pengajuan tidak disetujui oleh admin.</p>
+                <span class="guide-status-badge rejected">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                    Prestasi Ditolak
+                </span>
+                <p>Pengajuan tidak memenuhi kriteria validasi (misalnya berkas tidak valid atau tidak terbaca). Alasan penolakan dapat dilihat pada riwayat pengajuan.</p>
             </div>
         </div>
     </section>
 
+    {{-- TIPS BOX --}}
     <section class="guide-note">
-        <span class="guide-note-icon">i</span>
+        <div class="guide-note-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        </div>
         <div>
-            <strong>Tips sebelum mengirim pengajuan</strong>
+            <strong>Tips Pengajuan Agar Cepat Disetujui:</strong>
             <p>
-                Pastikan data sudah benar, file bukti dapat dibuka,
-                serta nama dan NIM anggota tim sesuai dengan profil yang
-                terdaftar. Hindari mengirim formulir yang sama berulang kali.
+                Pastikan nama kompetisi dan nama penyelenggara diketik sesuai teks resmi di sertifikat. Unggah berkas hasil scan yang jelas (tidak buram), serta pastikan nomor identitas (NIM/NIP) seluruh anggota tim sudah benar sebelum menekan tombol kirim pengajuan.
             </p>
         </div>
     </section>
@@ -138,16 +156,12 @@
 <style>
     .guide-page {
         --guide-purple: #5B3A8E;
-        --guide-dark: #432765;
+        --guide-dark: #342847;
+        --guide-muted: #746886;
+        --guide-border: #E8DFF2;
         --guide-gold: #C9A227;
-        --guide-muted: #81788F;
-        --guide-border: #E7DFF0;
-
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 0 30px;
-        color: #30283D;
+        color: #342847;
+        font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     .guide-page *,
@@ -160,32 +174,31 @@
         position: relative;
         overflow: hidden;
         margin-bottom: 28px;
-        padding: 32px;
+        padding: 30px 34px;
         border: 1px solid #E3D5F2;
-        border-left: 4px solid var(--guide-gold);
-        border-radius: 15px;
-        background: linear-gradient(
-            115deg,
-            #FFFFFF,
-            #F6F0FC 52%,
-            #E7D9F5
-        );
-        box-shadow: 0 10px 30px rgba(91,58,142,.06);
+        border-left: 5px solid var(--guide-gold);
+        border-radius: 16px;
+        background: linear-gradient(115deg, #FFFFFF, #F6F0FC 52%, #E7D9F5);
+        box-shadow: 0 8px 25px rgba(91,58,142,.05);
     }
 
     .guide-eyebrow,
     .guide-kicker {
         display: inline-block;
-        color: #8060A8;
-        font-size: 10px;
+        color: #8C6FA8;
+        font-size: 10.5px;
         font-weight: 800;
-        letter-spacing: 1.4px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
     }
 
     .guide-hero h1 {
-        margin: 12px 0 10px;
+        margin: 8px 0 10px;
         color: var(--guide-dark);
-        font-size: clamp(25px, 3vw, 32px);
+        font-size: clamp(24px, 3vw, 30px);
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.4px;
         line-height: 1.3;
     }
 
@@ -194,33 +207,35 @@
     }
 
     .guide-hero p {
-        max-width: 680px;
+        max-width: 720px;
         margin: 0;
         color: var(--guide-muted);
-        font-size: 13px;
-        line-height: 1.8;
+        font-size: 13.5px;
+        line-height: 1.75;
     }
 
     .guide-section {
-        margin-bottom: 28px;
+        margin-bottom: 30px;
     }
 
     .guide-section-heading {
-        margin-bottom: 17px;
+        margin-bottom: 18px;
     }
 
     .guide-section-heading h2,
     .guide-status-panel h2 {
-        margin: 7px 0;
+        margin: 4px 0 6px;
         color: var(--guide-dark);
-        font-size: 19px;
+        font-size: 20px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
     }
 
     .guide-section-heading p {
         margin: 0;
         color: var(--guide-muted);
-        font-size: 12px;
-        line-height: 1.8;
+        font-size: 13px;
+        line-height: 1.7;
     }
 
     .guide-grid {
@@ -230,153 +245,164 @@
     }
 
     .guide-card {
-        position: relative;
-        min-width: 0;
-        padding: 21px;
-        border: 1px solid var(--guide-border);
-        border-top: 3px solid var(--guide-purple);
-        border-radius: 13px;
-        background: linear-gradient(145deg, #FFFFFF, #F8F3FC);
-        box-shadow: 0 7px 22px rgba(67,39,101,.05);
-        transition: transform .2s, box-shadow .2s;
+        background: #FFFFFF;
+        border: 1px solid #ECE4F4;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 18px rgba(67, 39, 101, 0.04);
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        display: flex;
+        flex-direction: column;
     }
 
     .guide-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 13px 28px rgba(67,39,101,.09);
+        box-shadow: 0 12px 28px rgba(67, 39, 101, 0.08);
+        border-color: #DCCFE8;
+    }
+
+    .guide-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
     }
 
     .guide-number {
-        position: absolute;
-        top: 18px;
-        right: 18px;
-        color: #C9B7DC;
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 800;
+        letter-spacing: 0.8px;
+        padding: 3px 9px;
+        border-radius: 6px;
+        background: #F5EFE0;
+        color: #8C6A13;
+        border: 1px solid #EEDFBC;
+        text-transform: uppercase;
     }
 
     .guide-icon {
-        display: grid;
-        place-items: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         width: 42px;
         height: 42px;
-        margin-bottom: 16px;
-        border: 1px solid #E5D9F3;
-        border-radius: 11px;
-        background: #F0EAF8;
+        border-radius: 12px;
+        background: #F3EDFA;
+        border: 1px solid #E4D7F3;
         color: var(--guide-purple);
-        font-size: 21px;
     }
 
     .guide-card h3 {
-        margin: 0 0 9px;
+        margin: 0 0 8px;
         color: var(--guide-dark);
-        font-size: 15px;
+        font-size: 16px;
+        font-weight: 700;
+        font-family: 'Poppins', sans-serif;
     }
 
     .guide-card p {
         margin: 0;
         color: var(--guide-muted);
-        font-size: 12px;
-        line-height: 1.85;
+        font-size: 12.5px;
+        line-height: 1.75;
     }
 
     .guide-status-panel {
-        margin-bottom: 22px;
-        padding: 24px;
-        border: 1px solid var(--guide-border);
-        border-radius: 14px;
-        background: rgba(255,255,255,.97);
-        box-shadow: 0 7px 24px rgba(67,39,101,.045);
+        margin-bottom: 26px;
+        padding: 26px 30px;
+        border: 1px solid #ECE4F4;
+        border-radius: 16px;
+        background: #FFFFFF;
+        box-shadow: 0 4px 18px rgba(67, 39, 101, 0.04);
     }
 
     .guide-status-list {
-        display: grid;
+        display: flex;
+        flex-direction: column;
         gap: 0;
-        margin-top: 17px;
     }
 
     .guide-status-row {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 18px;
         padding: 14px 0;
-        border-top: 1px solid #F0EAF6;
+        border-top: 1px solid #F3EDF8;
     }
 
     .guide-status-row p {
         margin: 0;
         color: var(--guide-muted);
-        font-size: 12px;
+        font-size: 12.5px;
         line-height: 1.7;
     }
 
     .guide-status-badge {
-        display: inline-block;
-        flex: 0 0 165px;
-        padding: 7px 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        flex: 0 0 170px;
+        padding: 6px 12px;
         border-radius: 20px;
-        font-size: 10px;
-        font-weight: 800;
-        text-align: center;
+        font-size: 11px;
+        font-weight: 700;
+        white-space: nowrap;
     }
 
     .guide-status-badge.pending {
-        background: #FFF4D3;
-        color: #826219;
+        background: #FFF7E6;
+        color: #9A6C05;
+        border: 1px solid #FFE6A8;
     }
 
     .guide-status-badge.approved {
-        background: #E3F5E7;
-        color: #28653D;
-    }
-
-    .guide-status-badge.revision {
-        background: #FCEBDD;
-        color: #92531D;
+        background: #EDF9F1;
+        color: #157A3C;
+        border: 1px solid #C4ECCF;
     }
 
     .guide-status-badge.rejected {
-        background: #FBE5E8;
-        color: #9D3948;
+        background: #FDF2F2;
+        color: #B91C1C;
+        border: 1px solid #FACDCD;
     }
 
     .guide-note {
         display: flex;
         align-items: flex-start;
-        gap: 13px;
-        padding: 19px 21px;
+        gap: 16px;
+        padding: 22px 26px;
         border: 1px solid #E3D5F2;
-        border-left: 4px solid var(--guide-gold);
-        border-radius: 12px;
+        border-left: 5px solid var(--guide-purple);
+        border-radius: 14px;
         background: linear-gradient(120deg, #FAF7FE, #FFFDF8);
     }
 
     .guide-note-icon {
-        display: grid;
-        place-items: center;
-        flex: 0 0 28px;
-        width: 28px;
-        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
-        background: #EEE5F7;
+        background: #EDE4F8;
         color: var(--guide-purple);
-        font-family: Georgia, serif;
-        font-weight: 800;
+        border: 1px solid #D8C5ED;
     }
 
     .guide-note strong {
         display: block;
         margin-bottom: 6px;
         color: var(--guide-dark);
-        font-size: 12px;
+        font-size: 13.5px;
     }
 
     .guide-note p {
         margin: 0;
         color: var(--guide-muted);
-        font-size: 11px;
-        line-height: 1.9;
+        font-size: 12.5px;
+        line-height: 1.75;
     }
 
     @media (max-width: 950px) {
@@ -385,9 +411,9 @@
         }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
         .guide-hero {
-            padding: 23px;
+            padding: 22px;
         }
 
         .guide-grid {
@@ -395,7 +421,7 @@
         }
 
         .guide-status-panel {
-            padding: 18px;
+            padding: 20px;
         }
 
         .guide-status-row {
@@ -406,11 +432,10 @@
 
         .guide-status-badge {
             flex-basis: auto;
-            text-align: left;
         }
 
         .guide-note {
-            padding: 16px;
+            padding: 18px;
         }
     }
 </style>

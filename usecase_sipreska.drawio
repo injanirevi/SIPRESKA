@@ -1,0 +1,163 @@
+<mxfile host="app.diagrams.net" agent="SIPRESKA">
+  <diagram id="usecase-sipreska-diagram" name="Use Case SIPRESKA">
+    <mxGraphModel dx="833" dy="493" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="e_mhs_logout" edge="1" parent="1" source="actor_mahasiswa" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_logout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dsn_logout" edge="1" parent="1" source="actor_dosen" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_logout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dsn_riwayat" edge="1" parent="1" source="actor_dosen" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_riwayat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dsn_revisi" edge="1" parent="1" source="actor_dosen" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_revisi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dsn_status" edge="1" parent="1" source="actor_dosen" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_status">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mhs_anggota" edge="1" parent="1" source="actor_mahasiswa" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_anggota">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mhs_status" edge="1" parent="1" source="actor_mahasiswa" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_status">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mhs_bukti" edge="1" parent="1" source="actor_mahasiswa" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_bukti">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mhs_ajukan" edge="1" parent="1" source="actor_mahasiswa" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_ajukan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mhs_login" edge="1" parent="1" source="actor_mahasiswa" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_adm_antrean" edge="1" parent="1" source="actor_admin" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_antrean">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_adm_telaah" edge="1" parent="1" source="actor_admin" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_telaah">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_adm_setujui" edge="1" parent="1" source="actor_admin" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_setujui">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_adm_tolak" edge="1" parent="1" source="actor_admin" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_tolak">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_adm_statistik" edge="1" parent="1" source="actor_admin" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;entryX=0.904;entryY=0.277;entryDx=0;entryDy=0;entryPerimeter=0;" target="uc_statistik">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_statistik" edge="1" parent="1" source="actor_superadmin" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_statistik">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_users" edge="1" parent="1" source="actor_superadmin" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_users">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_reset" edge="1" parent="1" source="actor_superadmin" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_reset">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_logout" edge="1" parent="1" source="actor_superadmin" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_logout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_adm_logout" edge="1" parent="1" source="actor_admin" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_logout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_adm_login" edge="1" parent="1" source="actor_admin" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_login" edge="1" parent="1" source="actor_superadmin" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mhs_revisi" edge="1" parent="1" source="actor_mahasiswa" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_revisi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mhs_riwayat" edge="1" parent="1" source="actor_mahasiswa" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_riwayat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dsn_anggota" edge="1" parent="1" source="actor_dosen" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_anggota">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dsn_bukti" edge="1" parent="1" source="actor_dosen" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_bukti">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dsn_ajukan" edge="1" parent="1" source="actor_dosen" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;" target="uc_ajukan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=32;horizontal=1;fillColor=#FAF7FD;strokeColor=#8A63D2;strokeWidth=2;fontSize=15;fontStyle=1;fontColor=#2D1B4E;collapsible=0;" value="Sistem SIPRESKA" vertex="1">
+          <mxGeometry height="740" width="560" x="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dsn_login" edge="1" parent="boundary" style="edgeStyle=none;rounded=0;html=1;endArrow=none;strokeColor=#2D1B4E;strokeWidth=1.4;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-140" y="431.4011053421466" as="sourcePoint" />
+            <mxPoint x="233.26640897475022" y="81.3784990188791" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uc_bukti" parent="boundary" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Mengunggah berkas bukti (sertifikat / SK)" vertex="1">
+          <mxGeometry height="42" width="230" x="30" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_anggota" parent="boundary" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Menambahkan anggota tim (kelompok)" vertex="1">
+          <mxGeometry height="42" width="230" x="30" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_status" parent="boundary" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Melihat status &amp; catatan verifikasi" vertex="1">
+          <mxGeometry height="40" width="220" x="35" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_revisi" parent="boundary" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Memperbaiki pengajuan yang ditolak" vertex="1">
+          <mxGeometry height="40" width="220" x="35" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_riwayat" parent="boundary" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Melihat riwayat prestasi &amp; portofolio" vertex="1">
+          <mxGeometry height="40" width="220" x="35" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_ajukan" parent="boundary" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Mengajukan prestasi" vertex="1">
+          <mxGeometry height="40" width="210" x="40" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_reset" parent="boundary" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Mereset kata sandi pengguna" vertex="1">
+          <mxGeometry height="40" width="220" x="285" y="585" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_users" parent="boundary" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Mengelola akun pengguna (tambah, edit, hapus)" vertex="1">
+          <mxGeometry height="44" width="250" x="270" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_statistik" parent="boundary" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Melihat statistik capaian sistem" vertex="1">
+          <mxGeometry height="40" width="210" x="290" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_catatan" parent="boundary" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D97706;strokeWidth=1.5;fontSize=11.5;fontColor=#78350F;strokeDasharray=3 3;" value="Mengisi catatan verifikasi penolakan" vertex="1">
+          <mxGeometry height="40" width="220" x="285" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_login" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.8;fontSize=12;fontStyle=1;fontColor=#2D1B4E;" value="Login Sistem" vertex="1">
+          <mxGeometry height="42" width="180" x="410" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_antrean" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Melihat daftar antrean pengajuan" vertex="1">
+          <mxGeometry height="40" width="210" x="510" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_telaah" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Memeriksa detail pengajuan &amp; bukti" vertex="1">
+          <mxGeometry height="40" width="210" x="510" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_setujui" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Menyetujui pengajuan prestasi" vertex="1">
+          <mxGeometry height="40" width="210" x="510" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_tolak" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Menolak pengajuan prestasi" vertex="1">
+          <mxGeometry height="40" width="210" x="510" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_logout" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5B3A8E;strokeWidth=1.8;fontSize=12;fontStyle=1;fontColor=#2D1B4E;" value="Logout" vertex="1">
+          <mxGeometry height="42" width="180" x="410" y="705" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_mahasiswa" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#FFFFFF;strokeColor=#2D1B4E;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#2D1B4E;" value="Mahasiswa" vertex="1">
+          <mxGeometry height="85" width="45" x="60" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_dosen" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#FFFFFF;strokeColor=#2D1B4E;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#2D1B4E;" value="Dosen" vertex="1">
+          <mxGeometry height="85" width="45" x="60" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_admin" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#FFFFFF;strokeColor=#2D1B4E;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#2D1B4E;" value="Admin" vertex="1">
+          <mxGeometry height="85" width="45" x="900" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_superadmin" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#FFFFFF;strokeColor=#2D1B4E;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#2D1B4E;" value="Super Admin" vertex="1">
+          <mxGeometry height="85" width="45" x="900" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tolak_catatan" edge="1" parent="1" source="uc_tolak" style="edgeStyle=none;rounded=0;dashed=1;html=1;endArrow=open;strokeColor=#D97706;strokeWidth=1.3;fontSize=10.5;fontColor=#92400E;" target="uc_catatan" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

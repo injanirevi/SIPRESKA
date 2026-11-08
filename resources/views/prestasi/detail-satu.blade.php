@@ -1,8 +1,27 @@
-@extends('layouts.landing')
+@extends(auth()->check() ? 'layouts.app' : 'layouts.landing')
 
 @section('title', $prestasi->nama_prestasi . ' - SIPRESKA')
 
 @section('content')
+@php
+    $statusLabel = match ($prestasi->status) {
+        'menunggu_verifikasi' => 'Menunggu Verifikasi',
+        'disetujui' => 'Disetujui',
+        'perlu_perbaikan' => 'Perlu Perbaikan',
+        'ditolak' => 'Ditolak',
+        default => 'Dalam Proses',
+    };
+    $statusColor = match ($prestasi->status) {
+        'disetujui' => ['bg' => '#D1FAE5', 'text' => '#065F46', 'border' => '#A7F3D0', 'dot' => '#059669'],
+        'ditolak' => ['bg' => '#FEE2E2', 'text' => '#991B1B', 'border' => '#FECACA', 'dot' => '#DC2626'],
+        'perlu_perbaikan' => ['bg' => '#FEF9C3', 'text' => '#854D0E', 'border' => '#FEF08A', 'dot' => '#CA8A04'],
+        default => ['bg' => '#FEF3C7', 'text' => '#92400E', 'border' => '#FDE68A', 'dot' => '#D97706'],
+    };
+    $catatanTerbaru = $prestasi->verifikasi?->sortByDesc('tanggal_verifikasi')->first()?->catatan;
+    $user = auth()->user();
+    $canEdit = $user && in_array($user->role, ['mahasiswa', 'dosen'], true) && in_array($prestasi->status, ['ditolak', 'perlu_perbaikan'], true);
+@endphp
+
 <section class="section section-soft catalog-section public-profile-section achievement-detail-section">
     <div class="achievement-detail-shell">
         <a href="{{ $backUrl }}" class="public-profile-back">&larr; Kembali</a>
@@ -10,9 +29,31 @@
         <div class="achievement-detail-card">
             <header class="achievement-detail-header">
                 <div>
-                    <span class="eyebrow dark">RINCIAN PENCAPAIAN</span>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; flex-wrap: wrap;">
+                        <span class="eyebrow dark" style="margin: 0;">RINCIAN PENCAPAIAN</span>
+                        <span style="display: inline-flex; align-items: center; gap: 7px; padding: 4px 12px; border-radius: 20px; font-size: 11.5px; font-weight: 700; background: {{ $statusColor['bg'] }}; color: {{ $statusColor['text'] }}; border: 1px solid {{ $statusColor['border'] }};">
+                            <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ $statusColor['dot'] }};"></span>
+                            {{ $statusLabel }}
+                        </span>
+                    </div>
                     <h1>{{ $prestasi->nama_prestasi }}</h1>
                     <p>{{ $prestasi->penyelenggara ?: 'Informasi pencapaian sivitas akademika' }}</p>
+
+                    @if (!empty($catatanTerbaru))
+                        <div style="margin-top: 16px; padding: 14px 18px; border-radius: 12px; background: #FFFBEB; border: 1px solid #FDE68A; border-left: 4px solid #D97706;">
+                            <strong style="display: block; font-size: 13px; color: #92400E; margin-bottom: 4px;">Catatan dari Verifikator Sistem</strong>
+                            <p style="margin: 0; font-size: 13px; color: #78350F; line-height: 1.5;">{{ $catatanTerbaru }}</p>
+                        </div>
+                    @endif
+
+                    @if ($canEdit)
+                        <div style="margin-top: 16px;">
+                            <a href="{{ route('prestasi.edit', $prestasi) }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 10px; background: linear-gradient(135deg, #5B3A8E 0%, #432765 100%); color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 700; box-shadow: 0 4px 12px rgba(91, 58, 142, 0.25);">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                                <span>Perbaiki & Ajukan Kembali</span>
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </header>
 

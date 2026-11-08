@@ -1,0 +1,202 @@
+<mxfile host="app.diagrams.net" agent="SIPRESKA">
+  <diagram id="activity-sipreska-diagram" name="Activity Diagram SIPRESKA">
+    <mxGraphModel dx="1094" dy="649" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title_ad1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#2D1B4E;" value="Activity Diagram: Pengajuan, Verifikasi &amp; Perbaikan Prestasi" vertex="1">
+          <mxGeometry height="30" width="600" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_sivitas_ad" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=32;horizontal=1;fillColor=#FFFFFF;strokeColor=#8A63D2;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#2D1B4E;collapsible=0;" value="Sivitas (Mahasiswa / Dosen)" vertex="1">
+          <mxGeometry height="980" width="370" x="40" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_admin_ad" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=32;horizontal=1;fillColor=#FAF7FD;strokeColor=#8A63D2;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#2D1B4E;collapsible=0;" value="Administrator (Verifikator)" vertex="1">
+          <mxGeometry height="980" width="380" x="410" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="act_init" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#2D1B4E;strokeColor=#2D1B4E;" value="" vertex="1">
+          <mxGeometry height="28" width="28" x="210" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="act_form" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8A63D2;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Mengisi formulir data kompetisi&#xa;&amp; menentukan jenis (individu/tim)" vertex="1">
+          <mxGeometry height="46" width="220" x="115" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="act_upload" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8A63D2;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Mengunggah berkas bukti lampiran&#xa;(sertifikat / SK / dokumentasi maks 2MB)" vertex="1">
+          <mxGeometry height="48" width="220" x="115" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="act_konfirm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF7FD;strokeColor=#8A63D2;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Konfirmasi melalui dialog modal&#xa;&amp; kirim formulir pengajuan" vertex="1">
+          <mxGeometry height="46" width="220" x="115" y="315" as="geometry" />
+        </mxCell>
+        <mxCell id="act_antrean" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=1.5;fontSize=11.5;fontStyle=1;fontColor=#92400E;" value="Sistem mendaftarkan pengajuan&#xa;ke antrean (Menunggu Verifikasi)" vertex="1">
+          <mxGeometry height="46" width="220" x="115" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="act_buka" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8A63D2;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Membuka antrean verifikasi&#xa;&amp; telaah detail berkas bukti" vertex="1">
+          <mxGeometry height="46" width="220" x="490" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="act_valid_decide" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF9C3;strokeColor=#CA8A04;strokeWidth=1.5;fontSize=11;fontColor=#854D0E;" value="Apakah berkas&#xa;&amp; data valid?" vertex="1">
+          <mxGeometry height="60" width="120" x="540" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="act_setuju" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#10B981;strokeWidth=1.5;fontSize=11.5;fontStyle=1;fontColor=#065F46;" value="Setujui Pengajuan:&#xa;Status = Disetujui" vertex="1">
+          <mxGeometry height="46" width="140" x="440" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="act_tolak" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#EF4444;strokeWidth=1.5;fontSize=11.5;fontStyle=1;fontColor=#991B1B;" value="Tolak Pengajuan &amp; wajib tulis&#xa;catatan alasan penolakan" vertex="1">
+          <mxGeometry height="46" width="160" x="610" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="act_publish" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#10B981;strokeWidth=1.5;fontSize=11.5;fontColor=#065F46;" value="Sistem merilis capaian resmi&#xa;ke portofolio publik sivitas" vertex="1">
+          <mxGeometry height="46" width="140" x="440" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="act_notif_tolak" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#EF4444;strokeWidth=1.5;fontSize=11.5;fontColor=#991B1B;" value="Sivitas menerima status Ditolak&#xa;&amp; membaca catatan verifikator" vertex="1">
+          <mxGeometry height="46" width="220" x="115" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="act_revisi_decide" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF9C3;strokeColor=#CA8A04;strokeWidth=1.5;fontSize=11;fontColor=#854D0E;" value="Ajukan&#xa;Perbaikan?" vertex="1">
+          <mxGeometry height="60" width="120" x="165" y="725" as="geometry" />
+        </mxCell>
+        <mxCell id="act_revisi_fix" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EF4444;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Klik &#39;Perbaiki &amp; Ajukan Kembali&#39;&#xa;lalu perbarui dokumen pendukung" vertex="1">
+          <mxGeometry height="48" width="200" x="80" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="act_final_archived" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF7FD;strokeColor=#8A63D2;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Pengajuan diarsipkan" vertex="1">
+          <mxGeometry height="48" width="140" x="250" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="act_final1" parent="1" style="ellipse;html=1;shape=endState;fillColor=#10B981;strokeColor=#065F46;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="495" y="725" as="geometry" />
+        </mxCell>
+        <mxCell id="act_final2" parent="1" style="ellipse;html=1;shape=endState;fillColor=#64748B;strokeColor=#334155;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="305" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="title_ad2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#2D1B4E;" value="Activity Diagram: Manajemen Akun &amp; Kontrol Hak Akses (Super Admin)" vertex="1">
+          <mxGeometry height="30" width="500" x="830" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_sa_actor" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=32;horizontal=1;fillColor=#FFFFFF;strokeColor=#8A63D2;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#2D1B4E;collapsible=0;" value="Super Administrator" vertex="1">
+          <mxGeometry height="980" width="250" x="830" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_sa_sys" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=32;horizontal=1;fillColor=#FAF7FD;strokeColor=#8A63D2;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#2D1B4E;collapsible=0;" value="Sistem &amp; Database SIPRESKA" vertex="1">
+          <mxGeometry height="980" width="240" x="1080" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_act_init" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#2D1B4E;strokeColor=#2D1B4E;" value="" vertex="1">
+          <mxGeometry height="28" width="28" x="940" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_act_login" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF7FD;strokeColor=#8A63D2;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Login &amp; buka halaman&#xa;Manajemen Akun (/users)" vertex="1">
+          <mxGeometry height="46" width="190" x="860" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_act_decide" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF9C3;strokeColor=#CA8A04;strokeWidth=1.5;fontSize=11;fontColor=#854D0E;" value="Pilih Tindakan&#xa;Kelola Akun?" vertex="1">
+          <mxGeometry height="60" width="120" x="895" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_act_tambah" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8A63D2;strokeWidth=1.5;fontSize=11;fontColor=#2D1B4E;" value="Tambah Pengguna Baru:&#xa;Input data &amp; pilih role" vertex="1">
+          <mxGeometry height="44" width="140" x="845" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_act_edit" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8A63D2;strokeWidth=1.5;fontSize=11;fontColor=#2D1B4E;" value="Edit Pengguna:&#xa;Ubah identitas atau role" vertex="1">
+          <mxGeometry height="44" width="140" x="845" y="405" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_act_reset" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8A63D2;strokeWidth=1.5;fontSize=11;fontColor=#2D1B4E;" value="Reset Kata Sandi:&#xa;Masukkan password baru" vertex="1">
+          <mxGeometry height="44" width="140" x="845" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_act_hapus" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEECEB;strokeColor=#EF4444;strokeWidth=1.5;fontSize=11;fontColor=#991B1B;" value="Hapus Akun:&#xa;Konfirmasi modal hapus" vertex="1">
+          <mxGeometry height="44" width="140" x="845" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_sys_valid" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF7FD;strokeColor=#8A63D2;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Validasi keunikan data&#xa;(Email &amp; NIM/NIP)" vertex="1">
+          <mxGeometry height="44" width="190" x="1105" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_sys_db" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF7FD;strokeColor=#8A63D2;strokeWidth=1.5;fontSize=11.5;fontColor=#2D1B4E;" value="Enkripsi password (Bcrypt)&#xa;&amp; perbarui database MySQL" vertex="1">
+          <mxGeometry height="46" width="190" x="1105" y="435" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_sys_auth_del" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEECEB;strokeColor=#EF4444;strokeWidth=1.5;fontSize=11;fontColor=#991B1B;" value="Cek otorisasi keamanan&#xa;(cegah hapus akun sendiri)" vertex="1">
+          <mxGeometry height="44" width="190" x="1105" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_sys_notif" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#10B981;strokeWidth=1.5;fontSize=11.5;fontStyle=1;fontColor=#065F46;" value="Tampilkan notifikasi berhasil&#xa;&amp; refresh tabel data akun" vertex="1">
+          <mxGeometry height="46" width="190" x="1105" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_final" parent="1" style="ellipse;html=1;shape=endState;fillColor=#10B981;strokeColor=#065F46;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="1185" y="725" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad1" edge="1" parent="1" source="act_init" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="act_form">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad2" edge="1" parent="1" source="act_form" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="act_upload">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad3" edge="1" parent="1" source="act_upload" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="act_konfirm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad4" edge="1" parent="1" source="act_konfirm" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="act_antrean">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad5" edge="1" parent="1" source="act_antrean" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#8A63D2;strokeWidth=1.8;" target="act_buka">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad6" edge="1" parent="1" source="act_buka" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="act_valid_decide">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad7" edge="1" parent="1" source="act_valid_decide" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#10B981;strokeWidth=1.6;fontSize=11;fontColor=#065F46;" target="act_setuju" value="Ya (Valid)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad8" edge="1" parent="1" source="act_valid_decide" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#EF4444;strokeWidth=1.6;fontSize=11;fontColor=#991B1B;" target="act_tolak" value="Tidak (Revisi)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad9" edge="1" parent="1" source="act_setuju" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#10B981;strokeWidth=1.6;" target="act_publish">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad10" edge="1" parent="1" source="act_publish" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#10B981;strokeWidth=1.6;" target="act_final1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad11" edge="1" parent="1" source="act_tolak" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#EF4444;strokeWidth=1.6;" target="act_notif_tolak">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad12" edge="1" parent="1" source="act_notif_tolak" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="act_revisi_decide">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad13" edge="1" parent="1" source="act_revisi_decide" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#EF4444;strokeWidth=1.6;fontSize=11;fontColor=#991B1B;" target="act_revisi_fix" value="Ya">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad14" edge="1" parent="1" source="act_revisi_decide" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;fontSize=11;fontColor=#2D1B4E;" target="act_final_archived" value="Tidak">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad15" edge="1" parent="1" source="act_revisi_fix" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#EF4444;strokeWidth=1.6;" target="act_form">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ad16" edge="1" parent="1" source="act_final_archived" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="act_final2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad1" edge="1" parent="1" source="sa_act_init" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="sa_act_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad2" edge="1" parent="1" source="sa_act_login" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="sa_act_decide">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad3" edge="1" parent="1" source="sa_act_decide" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;fontSize=10.5;fontColor=#2D1B4E;" target="sa_act_tambah" value="Tambah">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad4" edge="1" parent="1" source="sa_act_decide" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;fontSize=10.5;fontColor=#2D1B4E;" target="sa_act_edit" value="Edit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad5" edge="1" parent="1" source="sa_act_decide" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;fontSize=10.5;fontColor=#2D1B4E;" target="sa_act_reset" value="Reset">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad6" edge="1" parent="1" source="sa_act_decide" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;fontSize=10.5;fontColor=#2D1B4E;" target="sa_act_hapus" value="Hapus">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad7" edge="1" parent="1" source="sa_act_tambah" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="sa_sys_valid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad8" edge="1" parent="1" source="sa_act_edit" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="sa_sys_valid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad9" edge="1" parent="1" source="sa_act_reset" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="sa_sys_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad10" edge="1" parent="1" source="sa_act_hapus" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#EF4444;strokeWidth=1.6;" target="sa_sys_auth_del">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad11" edge="1" parent="1" source="sa_sys_valid" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="sa_sys_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad12" edge="1" parent="1" source="sa_sys_auth_del" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#2D1B4E;strokeWidth=1.6;" target="sa_sys_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad13" edge="1" parent="1" source="sa_sys_db" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#10B981;strokeWidth=1.6;" target="sa_sys_notif">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sa_ad14" edge="1" parent="1" source="sa_sys_notif" style="edgeStyle=none;rounded=0;html=1;endArrow=classic;endFill=1;strokeColor=#10B981;strokeWidth=1.6;" target="sa_final">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

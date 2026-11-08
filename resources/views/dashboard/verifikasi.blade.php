@@ -8,7 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -18,7 +18,7 @@
 
         .sidebar,
         .sidebar * {
-            font-family: Arial, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         :root {
@@ -109,43 +109,43 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 14px;
+            padding: 11px 14px;
             border: 1px solid transparent;
-            border-radius: 9px;
+            border-radius: 10px;
             color: #655B73;
-            font-size: 13px;
-            line-height: 1.5;
             text-decoration: none;
-            transition: background .2s, color .2s;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.5;
+            transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .menu a:hover,
-        .menu a.active {
-            background: linear-gradient(110deg,#F0EAF8,#E3D5F3);
+        .menu a:hover {
+            background: #FAF7FD;
             color: var(--purple);
+            transform: translateX(3px);
         }
 
         .menu a.active {
-            border-color: #E5D9F3;
-            box-shadow: inset 3px 0 0 var(--purple);
+            background: linear-gradient(135deg, #F3ECF9 0%, #EDE1F7 100%);
+            border-color: #E2D1F3;
+            color: var(--purple);
             font-weight: 700;
+            box-shadow: 0 2px 8px rgba(91, 58, 142, 0.08);
         }
 
         .menu-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 22px;
-            height: 22px;
+            width: 18px;
+            height: 18px;
             flex-shrink: 0;
-            border-radius: 7px;
-            background: #F5F0FA;
-            color: var(--purple);
-            font-size: 14px;
+            color: inherit;
         }
 
         .menu a.active .menu-icon {
-            background: #FFFFFF;
+            color: var(--purple);
         }
 
         .sidebar-counter-badge {
@@ -162,21 +162,31 @@
 
         .logout {
             margin-top: auto;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
+            padding-top: 24px;
         }
 
         .logout button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             width: 100%;
-            padding: 12px;
-            border: 0;
-            border-radius: 9px;
-            background: transparent;
-            color: #B64B57;
-            text-align: left;
-            font-size: 13px;
+            padding: 10px 14px;
+            border: 1px solid #F5D3D3;
+            border-radius: 10px;
+            background: #FFF5F5;
+            color: #B91C1C;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background .2s;
+            transition: all .2s ease;
+        }
+
+        .logout button:hover {
+            background: #FEE2E2;
+            border-color: #F87171;
+            transform: translateY(-1px);
         }
 
         .logout button:hover {
@@ -1064,6 +1074,192 @@
                 text-align: center;
             }
         }
+
+        /* MODERN SIPRESKA CONFIRMATION & ALERT DIALOG */
+        .sipreska-dialog-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(36, 27, 49, 0.72);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .sipreska-dialog-backdrop.active {
+            display: flex;
+            animation: dialogFadeIn .2s ease-out;
+        }
+
+        @keyframes dialogFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes dialogPopIn {
+            from { opacity: 0; transform: scale(0.92) translateY(8px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .sipreska-dialog-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 440px;
+            padding: 30px 26px 26px;
+            box-shadow: 0 25px 50px -12px rgba(45, 27, 78, 0.35), 0 0 0 1px rgba(138, 99, 210, 0.15);
+            text-align: center;
+            animation: dialogPopIn .25s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        }
+
+        .sipreska-dialog-icon-wrap {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            margin: 0 auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s ease;
+        }
+
+        .sipreska-dialog-icon-wrap.approve {
+            background: #ECFDF5;
+            color: #10B981;
+            box-shadow: 0 0 0 8px #F0FDF4;
+        }
+
+        .sipreska-dialog-icon-wrap.reject {
+            background: #FEF2F2;
+            color: #EF4444;
+            box-shadow: 0 0 0 8px #FFF1F2;
+        }
+
+        .sipreska-dialog-icon-wrap.warning {
+            background: #FFFBEB;
+            color: #F59E0B;
+            box-shadow: 0 0 0 8px #FEF3C7;
+        }
+
+        .sipreska-dialog-title {
+            font-size: 19px;
+            font-weight: 800;
+            color: #2D1B4E;
+            margin: 0 0 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .sipreska-dialog-message {
+            font-size: 13.5px;
+            color: #64748B;
+            line-height: 1.55;
+            margin: 0 0 16px;
+        }
+
+        .sipreska-dialog-note-preview {
+            background: #F8FAFC;
+            border: 1px dashed #CBD5E1;
+            border-radius: 12px;
+            padding: 12px 14px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .sipreska-dialog-note-label {
+            display: block;
+            font-size: 10.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #64748B;
+            margin-bottom: 4px;
+        }
+
+        .sipreska-dialog-note-text {
+            font-size: 12.5px;
+            color: #334155;
+            margin: 0;
+            line-height: 1.45;
+            word-break: break-word;
+            font-style: italic;
+        }
+
+        .sipreska-dialog-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .sipreska-btn-cancel {
+            flex: 1;
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 1px solid #E2E8F0;
+            background: #F8FAFC;
+            color: #475569;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .15s ease;
+        }
+
+        .sipreska-btn-cancel:hover {
+            background: #E2E8F0;
+            color: #1E293B;
+        }
+
+        .sipreska-btn-confirm {
+            flex: 1.2;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: none;
+            font-size: 13px;
+            font-weight: 700;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: all .15s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .sipreska-btn-confirm.approve {
+            background: linear-gradient(135deg, #10B981, #059669);
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+        }
+
+        .sipreska-btn-confirm.approve:hover {
+            filter: brightness(1.06);
+            transform: translateY(-1px);
+        }
+
+        .sipreska-btn-confirm.reject {
+            background: linear-gradient(135deg, #EF4444, #DC2626);
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+        }
+
+        .sipreska-btn-confirm.reject:hover {
+            filter: brightness(1.06);
+            transform: translateY(-1px);
+        }
+
+        .sipreska-btn-confirm.warning {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+        }
+
+        .sipreska-btn-confirm.warning:hover {
+            filter: brightness(1.06);
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 
@@ -1132,7 +1328,10 @@
         <div class="logout">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit">Keluar dari Akun</button>
+                <button type="submit">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    <span>Keluar dari Akun</span>
+                </button>
             </form>
         </div>
     </aside>
@@ -1364,6 +1563,28 @@
         </div>
 
     </main>
+</div>
+
+
+{{-- CUSTOM CONFIRMATION & ALERT DIALOG (MODERN SIPRESKA) --}}
+<div class="sipreska-dialog-backdrop" id="sipreskaConfirmModal" aria-hidden="true" style="display:none;">
+    <div class="sipreska-dialog-card" role="alertdialog" aria-modal="true" aria-labelledby="sipreskaDialogTitle">
+        <div class="sipreska-dialog-icon-wrap" id="sipreskaDialogIconWrap">
+            {{-- Dynamic SVG Icon --}}
+        </div>
+        <div class="sipreska-dialog-content">
+            <h4 class="sipreska-dialog-title" id="sipreskaDialogTitle">Konfirmasi</h4>
+            <p class="sipreska-dialog-message" id="sipreskaDialogMessage">Pesan konfirmasi</p>
+            <div class="sipreska-dialog-note-preview" id="sipreskaDialogNotePreview" style="display:none;">
+                <span class="sipreska-dialog-note-label">Catatan Verifikator:</span>
+                <p class="sipreska-dialog-note-text" id="sipreskaDialogNoteText"></p>
+            </div>
+        </div>
+        <div class="sipreska-dialog-actions" id="sipreskaDialogActions">
+            <button type="button" class="sipreska-btn-cancel" id="sipreskaDialogBtnCancel" onclick="closeSipreskaDialog()">Batal</button>
+            <button type="button" class="sipreska-btn-confirm" id="sipreskaDialogBtnConfirm">Lanjutkan</button>
+        </div>
+    </div>
 </div>
 
 {{-- MODAL TELAAH & VERIFIKASI (LUAS, LAPANG, BERSIH, TIDAK MEPET) --}}
@@ -1622,23 +1843,145 @@
         }
     });
 
+    // CUSTOM MODERN CONFIRMATION & ALERT MODAL LOGIC
+    const dialogModal = document.getElementById('sipreskaConfirmModal');
+    const dialogIconWrap = document.getElementById('sipreskaDialogIconWrap');
+    const dialogTitle = document.getElementById('sipreskaDialogTitle');
+    const dialogMessage = document.getElementById('sipreskaDialogMessage');
+    const dialogNotePreview = document.getElementById('sipreskaDialogNotePreview');
+    const dialogNoteText = document.getElementById('sipreskaDialogNoteText');
+    const dialogBtnCancel = document.getElementById('sipreskaDialogBtnCancel');
+    const dialogBtnConfirm = document.getElementById('sipreskaDialogBtnConfirm');
+
+    let onConfirmCallback = null;
+
+    function closeSipreskaDialog() {
+        if (!dialogModal) return;
+        dialogModal.classList.remove('active');
+        dialogModal.style.display = 'none';
+        dialogModal.setAttribute('aria-hidden', 'true');
+        onConfirmCallback = null;
+    }
+
+    if (dialogBtnConfirm) {
+        dialogBtnConfirm.addEventListener('click', () => {
+            if (typeof onConfirmCallback === 'function') {
+                const cb = onConfirmCallback;
+                closeSipreskaDialog();
+                cb();
+            } else {
+                closeSipreskaDialog();
+            }
+        });
+    }
+
+    if (dialogModal) {
+        dialogModal.addEventListener('click', (e) => {
+            if (e.target === dialogModal) {
+                closeSipreskaDialog();
+            }
+        });
+    }
+
+    function showSipreskaConfirm({ type, title, message, note, confirmText, onConfirm }) {
+        if (!dialogModal) return;
+
+        onConfirmCallback = onConfirm;
+
+        // Reset classes
+        dialogIconWrap.className = 'sipreska-dialog-icon-wrap ' + type;
+        dialogBtnConfirm.className = 'sipreska-btn-confirm ' + type;
+        dialogBtnCancel.style.display = 'inline-block';
+
+        // Set Icon
+        if (type === 'approve') {
+            dialogIconWrap.innerHTML = '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
+        } else if (type === 'reject') {
+            dialogIconWrap.innerHTML = '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
+        } else {
+            dialogIconWrap.innerHTML = '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+        }
+
+        // Set Text
+        dialogTitle.textContent = title;
+        dialogMessage.textContent = message;
+        dialogBtnConfirm.textContent = confirmText || 'Lanjutkan';
+
+        // Set Note Preview
+        if (note && note.trim() !== '') {
+            dialogNoteText.textContent = note.trim();
+            dialogNotePreview.style.display = 'block';
+        } else {
+            dialogNotePreview.style.display = 'none';
+        }
+
+        dialogModal.style.display = 'flex';
+        // force reflow
+        void dialogModal.offsetWidth;
+        dialogModal.classList.add('active');
+        dialogModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function showSipreskaAlert({ type, title, message, buttonText }) {
+        if (!dialogModal) return;
+
+        onConfirmCallback = null;
+
+        dialogIconWrap.className = 'sipreska-dialog-icon-wrap ' + (type || 'warning');
+        dialogBtnConfirm.className = 'sipreska-btn-confirm ' + (type || 'warning');
+        dialogBtnCancel.style.display = 'none';
+
+        dialogIconWrap.innerHTML = '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+
+        dialogTitle.textContent = title;
+        dialogMessage.textContent = message;
+        dialogBtnConfirm.textContent = buttonText || 'Mengerti';
+        dialogNotePreview.style.display = 'none';
+
+        dialogModal.style.display = 'flex';
+        void dialogModal.offsetWidth;
+        dialogModal.classList.add('active');
+        dialogModal.setAttribute('aria-hidden', 'false');
+    }
+
     function submitDecision(status) {
         modalStatusInput.value = status;
         const note = modalCatatan.value.trim();
 
         if (status === 'ditolak' && note === '') {
-            modalCatatan.style.borderColor = '#C0392B';
+            modalCatatan.style.borderColor = '#EF4444';
             modalCatatan.focus();
-            alert('Harap tuliskan catatan verifikasi untuk menjelaskan alasan penolakan pengajuan prestasi.');
+            showSipreskaAlert({
+                type: 'warning',
+                title: 'Catatan Penolakan Wajib Diisi',
+                message: 'Harap berikan penjelasan atau alasan penolakan pada kolom catatan verifikasi agar pengaju dapat mengetahui bagian yang perlu diperbaiki.',
+                buttonText: 'Mengerti & Tulis Catatan'
+            });
             return;
         }
 
-        const confirmMsg = status === 'disetujui'
-            ? 'Konfirmasi: Setujui pengajuan prestasi ini?'
-            : 'Konfirmasi: Tolak pengajuan prestasi ini?';
-
-        if (confirm(confirmMsg)) {
-            modalForm.submit();
+        if (status === 'disetujui') {
+            showSipreskaConfirm({
+                type: 'approve',
+                title: 'Setujui Pengajuan Prestasi?',
+                message: 'Pengajuan prestasi ini akan divalidasi sebagai capaian sah dan otomatis ditampilkan pada daftar prestasi terverifikasi serta portofolio sivitas.',
+                note: note,
+                confirmText: 'Ya, Setujui Prestasi',
+                onConfirm: () => {
+                    modalForm.submit();
+                }
+            });
+        } else {
+            showSipreskaConfirm({
+                type: 'reject',
+                title: 'Tolak Pengajuan Prestasi?',
+                message: 'Pengajuan prestasi ini akan ditolak. Pengaju akan menerima status ditolak beserta catatan alasan penolakan yang Anda cantumkan.',
+                note: note,
+                confirmText: 'Ya, Tolak Pengajuan',
+                onConfirm: () => {
+                    modalForm.submit();
+                }
+            });
         }
     }
 

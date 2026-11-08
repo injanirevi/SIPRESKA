@@ -23,47 +23,47 @@
     }
 
     $judulPrestasi = match ($user?->role) {
-        'dosen' => 'Prestasi Dosen',
-        'admin' => 'Semua Prestasi',
+        'dosen' => 'Prestasi Sivitas Dosen',
+        'admin', 'super_admin' => 'Semua Data Prestasi Sivitas',
         null => 'Prestasi Sivitas Akademika',
-        default => 'Prestasi Mahasiswa',
+        default => 'Prestasi Sivitas Mahasiswa',
     };
 
     $labelSivitas = match ($user?->role) {
         'dosen' => 'Dosen',
-        'admin' => 'Anggota Prestasi',
+        'admin', 'super_admin' => 'Anggota Prestasi',
         null => 'Anggota Sivitas Akademika',
         default => 'Mahasiswa',
     };
 
     $deskripsiHero = match ($user?->role) {
-        'dosen' => 'Jelajahi prestasi dosen yang telah disetujui dan temukan pencapaian inspiratif.',
-        'admin' => 'Kelola dan tinjau seluruh data prestasi sivitas akademika.',
-        null => 'Jelajahi prestasi mahasiswa dan dosen yang telah disetujui.',
-        default => 'Jelajahi prestasi mahasiswa yang telah disetujui dan temukan pencapaian inspiratif.',
+        'dosen' => 'Jelajahi rekam jejak capaian Tridharma dan kompetisi dosen yang telah tervalidasi dan terpublikasi resmi.',
+        'admin', 'super_admin' => 'Kelola, cari, dan tinjau seluruh arsip data prestasi sivitas akademika kampus.',
+        null => 'Jelajahi rekam jejak prestasi mahasiswa dan dosen yang telah divalidasi dan terpublikasi di SIPRESKA.',
+        default => 'Jelajahi rekam jejak prestasi mahasiswa yang telah divalidasi dan temukan pencapaian inspiratif Anda.',
     };
 
     $deskripsiPrestasi = match ($user?->role) {
-        'dosen' => 'Cari prestasi dosen berdasarkan nama, kategori, tingkat, atau tahun perolehan.',
-        'admin' => 'Lihat dan telusuri seluruh data prestasi yang tercatat.',
-        null => 'Cari prestasi mahasiswa dan dosen berdasarkan nama, kategori, tingkat, atau tahun perolehan.',
-        default => 'Cari prestasi mahasiswa berdasarkan nama, kategori, tingkat, atau tahun perolehan.',
+        'dosen' => 'Cari prestasi dosen berdasarkan nama kejuaraan, kategori, tingkat, atau tahun perolehan.',
+        'admin', 'super_admin' => 'Telusuri seluruh arsip data prestasi yang tercatat dalam sistem secara real-time.',
+        null => 'Cari prestasi sivitas berdasarkan nama, kategori, tingkat kompetisi, atau tahun perolehan.',
+        default => 'Cari prestasi mahasiswa berdasarkan nama kompetisi, kategori, tingkat, atau tahun perolehan.',
     };
 
     $pesanKosong = match ($user?->role) {
         'dosen' => 'Belum ada pengajuan prestasi dari akun dosen ini.',
-        'admin' => 'Belum ada data prestasi yang tersedia.',
+        'admin', 'super_admin' => 'Belum ada data prestasi yang tersedia.',
         null => 'Belum ada data prestasi sivitas akademika yang disetujui.',
         default => 'Belum ada pengajuan prestasi dari akun mahasiswa ini.',
     };
 
     $tampilkanFilterStatus = $user
-        && in_array($user->role, ['admin', 'mahasiswa', 'dosen'], true);
+        && in_array($user->role, ['admin', 'super_admin', 'mahasiswa', 'dosen'], true);
 @endphp
 
 <div class="sp-public-page">
 
-    {{-- HERO --}}
+    {{-- HERO / BANNER HEADER MODERN --}}
     <section class="sp-hero">
         <div class="sp-hero-content">
             <span class="sp-eyebrow">PUSAT INFORMASI PRESTASI</span>
@@ -88,30 +88,29 @@
             </div>
         </div>
 
-        {{-- PANEL FILTER --}}
+        {{-- PANEL FILTER MODERN --}}
         <div class="sp-filter-panel">
 
-            {{-- PENCARIAN --}}
+            {{-- BILAH PENCARIAN DENGAN IKON SVG --}}
             <div class="sp-search-field">
-                <span class="sp-search-icon" aria-hidden="true">⌕</span>
+                <svg class="sp-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
 
                 <input
                     type="search"
                     id="searchPrestasi"
-                    placeholder="Cari nama prestasi, anggota, atau penyelenggara..."
+                    placeholder="Cari nama prestasi, anggota sivitas, atau penyelenggara..."
                     aria-label="Cari prestasi"
+                    autocomplete="off"
                 >
             </div>
 
-            {{-- FILTER KATEGORI, TINGKAT, TAHUN, STATUS --}}
+            {{-- FILTER GRID: KATEGORI, TINGKAT, TAHUN, STATUS --}}
             <div class="sp-filter-grid {{ $tampilkanFilterStatus ? 'with-status' : '' }}">
 
                 <div class="sp-filter-field">
                     <label for="filterKategori">Kategori</label>
-
                     <select id="filterKategori">
                         <option value="">Semua Kategori</option>
-
                         @foreach ($kategoriFilter as $kategori)
                             <option value="{{ $kategori }}">
                                 {{ $kategori }}
@@ -122,10 +121,8 @@
 
                 <div class="sp-filter-field">
                     <label for="filterTingkat">Tingkat Prestasi</label>
-
                     <select id="filterTingkat">
                         <option value="">Semua Tingkat</option>
-
                         @foreach ($tingkatFilter as $tingkat)
                             <option value="{{ $tingkat }}">
                                 {{ $tingkat }}
@@ -136,10 +133,8 @@
 
                 <div class="sp-filter-field">
                     <label for="filterTahun">Tahun Perolehan</label>
-
                     <select id="filterTahun">
                         <option value="">Semua Tahun</option>
-
                         @foreach ($tahunFilter as $tahun)
                             <option value="{{ $tahun }}">
                                 {{ $tahun }}
@@ -150,8 +145,7 @@
 
                 @if ($tampilkanFilterStatus)
                     <div class="sp-filter-field">
-                        <label for="filterStatus">Status</label>
-
+                        <label for="filterStatus">Status Verifikasi</label>
                         <select id="filterStatus">
                             <option value="">Semua Status</option>
                             <option value="menunggu_verifikasi">Menunggu Verifikasi</option>
@@ -166,7 +160,8 @@
                     id="resetFilter"
                     class="sp-reset-button"
                 >
-                    Reset Filter
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                    <span>Reset Filter</span>
                 </button>
 
             </div>
@@ -174,20 +169,20 @@
 
         {{-- JUDUL HASIL --}}
         <div class="sp-results-heading">
-            <span>Hasil Pencarian</span>
+            <span>Daftar Hasil Pencarian</span>
             <span class="sp-results-line"></span>
         </div>
 
-        {{-- DAFTAR HASIL DALAM TABEL --}}
+        {{-- TABEL HASIL DENGAN GAYA MODERN --}}
         <div class="sp-results-table-wrap">
             <table class="sp-results-table" id="prestasiList">
                 <thead>
                     <tr>
-                        <th>Nama Prestasi</th>
+                        <th>Nama Prestasi & Anggota</th>
                         <th>Tingkat</th>
                         <th>Tahun</th>
                         <th>Status</th>
-                        <th>Detail</th>
+                        <th style="text-align: right;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -228,7 +223,7 @@
                         'disetujui' => 'Disetujui',
                         'perlu_perbaikan' => 'Perlu Perbaikan',
                         'ditolak' => 'Ditolak',
-                        default => 'Status Tidak Diketahui',
+                        default => 'Dalam Proses',
                     };
 
                     $statusClass = match ($prestasi->status) {
@@ -253,47 +248,54 @@
                             {{ $anggota->isNotEmpty() ? $anggota->join(', ') : 'Anggota belum diisi' }}
                         </div>
                     </td>
-                    <td>{{ $tingkat }}</td>
-                    <td>{{ $prestasi->tahun ?? '-' }}</td>
+                    <td>
+                        <span class="sp-level-pill">{{ $tingkat }}</span>
+                    </td>
+                    <td>
+                        <strong>{{ $prestasi->tahun ?? '-' }}</strong>
+                    </td>
                     <td>
                         <span class="sp-table-status {{ $statusClass }}">
+                            <span class="sp-status-dot"></span>
                             {{ $statusLabel }}
                         </span>
                     </td>
-                    <td>
+                    <td style="text-align: right;">
                         <div class="sp-table-actions">
-                        <button
-                            type="button"
-                            class="sp-table-detail-button"
-                            onclick='showPrestasiDetail(
-                                @json($prestasi->nama_prestasi),
-                                @json($anggota->join("\n")),
-                                @json($prestasi->jenis_prestasi === "tim" ? "Tim" : "Individu"),
-                                @json($tingkat),
-                                @json($kategoriNama),
-                                @json($prestasi->peringkat ?: "Belum ada peringkat"),
-                                @json((string) $prestasi->tahun),
-                                @json($prestasi->penyelenggara ?: "-"),
-                                @json($prestasi->deskripsi ?: "Belum ada deskripsi."),
-                                @json($statusLabel),
-                                @json($statusClass),
-                                @json($catatanVerifikasi),
-                                @json($buktiDetail)
-                            )'
-                        >Lihat Detail</button>
-                        @if (in_array($user?->role, ['mahasiswa', 'dosen'], true) && in_array($prestasi->status, ['ditolak', 'perlu_perbaikan'], true))
-                            <a
-                                href="{{ route('prestasi.edit', $prestasi) }}"
-                                class="sp-table-edit-link"
-                                title="Ajukan Kembali"
-                                aria-label="Ajukan Kembali"
+                            <button
+                                type="button"
+                                class="sp-table-detail-button"
+                                onclick='showPrestasiDetail(
+                                    @json($prestasi->nama_prestasi),
+                                    @json($anggota->join("\n")),
+                                    @json($prestasi->jenis_prestasi === "tim" ? "Tim" : "Individu"),
+                                    @json($tingkat),
+                                    @json($kategoriNama),
+                                    @json($prestasi->peringkat ?: "Belum ada peringkat"),
+                                    @json((string) $prestasi->tahun),
+                                    @json($prestasi->penyelenggara ?: "-"),
+                                    @json($prestasi->deskripsi ?: "Belum ada deskripsi."),
+                                    @json($statusLabel),
+                                    @json($statusClass),
+                                    @json($catatanVerifikasi),
+                                    @json($buktiDetail)
+                                )'
                             >
-                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                    <path d="m14.5 6.5 3 3M4 20l4.2-.9L19 8.3a2.1 2.1 0 0 0-3-3L5.2 16.1 4 20Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                <span>Ajukan Kembali</span>
-                            </a>
-                        @endif
+                                <span>Lihat Rincian</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </button>
+
+                            @if (in_array($user?->role, ['mahasiswa', 'dosen'], true) && in_array($prestasi->status, ['ditolak', 'perlu_perbaikan'], true))
+                                <a
+                                    href="{{ route('prestasi.edit', $prestasi) }}"
+                                    class="sp-table-edit-link"
+                                    title="Ajukan Kembali"
+                                    aria-label="Ajukan Kembali"
+                                >
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                                    <span>Ajukan Kembali</span>
+                                </a>
+                            @endif
                         </div>
                     </td>
                 </tr>
@@ -310,19 +312,21 @@
             class="sp-empty-state"
             style="display: none;"
         >
-            <div class="sp-empty-icon" aria-hidden="true">✦</div>
+            <div class="sp-empty-icon" aria-hidden="true">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--purple);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
 
             <h3 id="prestasiEmptyTitle">{{ $pesanKosong }}</h3>
 
             <p id="prestasiEmptyDescription">
-                Coba ubah kata kunci atau filter pencarianmu.
+                Coba ubah kata kunci atau kombinasi filter pencarian Anda.
             </p>
         </div>
 
     </section>
 </div>
 
-{{-- MODAL DETAIL PRESTASI --}}
+{{-- MODAL DETAIL PRESTASI MODERN --}}
 <div
     class="sp-detail-modal"
     id="prestasiModal"
@@ -345,22 +349,22 @@
             onclick="closePrestasiDetail()"
             aria-label="Tutup detail"
         >
-            &times;
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
 
         <div class="sp-modal-heading">
-            <span class="sp-section-kicker">INFORMASI PENCAPAIAN</span>
+            <span class="sp-section-kicker">INFORMASI LENGKAP PENCAPAIAN</span>
             <span id="modalStatus" class="sp-modal-status"></span>
         </div>
         <h2 id="modalJudul"></h2>
 
         <p class="sp-modal-intro" id="modalIntro">
-            Rincian prestasi dan dokumen pendukung.
+            Rincian data capaian dan arsip berkas bukti pendukung prestasi.
         </p>
 
         <div class="sp-modal-details">
             <div class="sp-modal-detail-item">
-                <span>Peserta</span>
+                <span>Peserta / Sivitas</span>
                 <strong id="modalNama"></strong>
             </div>
 
@@ -370,44 +374,42 @@
             </div>
 
             <div class="sp-modal-detail-item">
-                <span>Tingkat</span>
+                <span>Tingkat Kompetisi</span>
                 <strong id="modalTingkat"></strong>
             </div>
 
             <div class="sp-modal-detail-item">
-                <span>Kategori</span>
+                <span>Kategori Bidang</span>
                 <strong id="modalKategori"></strong>
             </div>
 
             <div class="sp-modal-detail-item">
-                <span>Peringkat</span>
+                <span>Peringkat / Capaian</span>
                 <strong id="modalPeringkat"></strong>
             </div>
 
-
-
             <div class="sp-modal-detail-item">
-                <span>Tahun</span>
+                <span>Tahun Perolehan</span>
                 <strong id="modalTahun"></strong>
             </div>
 
-            <div class="sp-modal-detail-item">
-                <span>Penyelenggara</span>
+            <div class="sp-modal-detail-item full-width">
+                <span>Penyelenggara Kegiatan</span>
                 <strong id="modalPenyelenggara"></strong>
             </div>
 
             <div class="sp-modal-detail-item full-width">
-                <span>Deskripsi</span>
+                <span>Deskripsi Kegiatan & Capaian</span>
                 <strong id="modalDeskripsi"></strong>
             </div>
 
             <section class="sp-modal-evidence full-width">
-                <h3>Bukti Prestasi</h3>
+                <h3>Dokumen & Berkas Bukti</h3>
                 <div id="modalBukti" class="sp-modal-evidence-list"></div>
             </section>
 
             <section id="modalCatatanWrap" class="sp-modal-note full-width" hidden>
-                <h3>Catatan Verifikasi</h3>
+                <h3>Catatan Verifikator</h3>
                 <p id="modalCatatan"></p>
             </section>
         </div>
@@ -415,20 +417,19 @@
 </div>
 
 <style>
-    /* WARNA DAN DASAR HALAMAN */
+    /* VARIABEL DAN TEMA DASAR */
     .sp-public-page {
-        --sp-purple: #65458e;
+        --sp-purple: #5B3A8E;
         --sp-purple-dark: #432765;
-        --sp-purple-light: #f5effb;
-        --sp-lavender: #eee5f7;
-        --sp-gold: #c9a227;
-        --sp-text: #342747;
-        --sp-muted: #81758f;
-        --sp-border: #e8e0ef;
+        --sp-purple-light: #F4EFFB;
+        --sp-lavender: #EEE5F7;
+        --sp-gold: #C9A227;
+        --sp-text: #342847;
+        --sp-muted: #80758F;
+        --sp-border: #E7DFF0;
 
         width: 100%;
         min-width: 0;
-        padding: 30px 0 55px;
         color: var(--sp-text);
         font-family: inherit;
     }
@@ -438,46 +439,47 @@
         box-sizing: border-box;
     }
 
-    /* HERO TANPA DEKORASI BULAT, BINTANG, DAN GARIS */
+    /* HERO BANNER MODERN DENGAN AKSEN EMAS */
     .sp-hero {
-        display: flex;
-        align-items: center;
-        min-height: 250px;
-        padding: 38px clamp(22px, 4vw, 48px);
-        border: 1px solid #e9dff4;
-        border-radius: 22px;
-        background:
-            radial-gradient(circle at 93% 15%, rgba(201,162,39,.16), transparent 25%),
-            linear-gradient(120deg, #f8f4fc, #e8ddf4);
+        position: relative;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(246, 239, 253, 0.95) 100%);
+        border: 1px solid #E4D8F0;
+        border-left: 5px solid var(--sp-gold);
+        border-radius: 16px;
+        padding: 28px 32px;
+        margin-bottom: 26px;
+        box-shadow: 0 6px 20px rgba(67, 39, 101, 0.04);
     }
 
     .sp-hero-content {
-        max-width: 700px;
+        max-width: 720px;
     }
 
     .sp-eyebrow,
     .sp-section-kicker {
         display: inline-block;
         color: var(--sp-purple);
-        font-size: 10px;
-        font-weight: 800;
-        letter-spacing: 1.8px;
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
     }
 
     .sp-eyebrow {
-        padding: 9px 13px;
-        border: 1px solid #ded0ed;
-        border-radius: 30px;
-        background: rgba(255,255,255,.65);
+        padding: 4px 10px;
+        border: 1px solid #DFD2ED;
+        border-radius: 20px;
+        background: #FAF7FD;
+        margin-bottom: 8px;
     }
 
     .sp-hero h1 {
-        margin: 18px 0 12px;
-        color: var(--sp-purple-dark);
-        font-size: clamp(31px, 4vw, 45px);
+        margin: 8px 0 10px;
+        font-family: 'Poppins', sans-serif;
+        color: #2D1A47;
+        font-size: 26px;
         font-weight: 700;
-        line-height: 1.2;
-        letter-spacing: -1px;
+        letter-spacing: -0.5px;
     }
 
     .sp-hero h1 span {
@@ -485,15 +487,14 @@
     }
 
     .sp-hero p {
-        max-width: 590px;
         margin: 0;
-        color: #776b87;
-        font-size: 13px;
-        line-height: 1.9;
+        color: #6C5E7F;
+        font-size: 13.5px;
+        line-height: 1.6;
     }
 
     .sp-list-section {
-        margin-top: 32px;
+        margin-top: 24px;
     }
 
     /* JUDUL DAN HITUNGAN */
@@ -502,77 +503,83 @@
         justify-content: space-between;
         align-items: flex-end;
         gap: 20px;
-        margin-bottom: 22px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
     }
 
     .sp-section-heading h2 {
-        margin: 8px 0;
-        color: var(--sp-purple-dark);
-        font-size: clamp(21px, 2.5vw, 27px);
-        font-weight: 800;
-        letter-spacing: -.5px;
+        margin: 4px 0 6px;
+        font-family: 'Poppins', sans-serif;
+        color: #26193D;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.3px;
     }
 
     .sp-section-heading p {
-        max-width: 700px;
         margin: 0;
-        color: var(--sp-muted);
-        font-size: 12px;
-        line-height: 1.8;
+        color: #716484;
+        font-size: 13px;
+        line-height: 1.6;
     }
 
     .sp-count {
         display: flex;
         align-items: center;
-        gap: 9px;
+        gap: 10px;
         flex-shrink: 0;
-        padding: 11px 14px;
+        padding: 8px 16px;
         border: 1px solid var(--sp-border);
         border-radius: 12px;
-        background: #fff;
+        background: #FFFFFF;
+        box-shadow: 0 2px 8px rgba(67, 39, 101, 0.03);
     }
 
     .sp-count span {
+        font-family: 'Poppins', sans-serif;
         color: var(--sp-purple);
         font-size: 22px;
-        font-weight: 800;
+        font-weight: 700;
+        line-height: 1;
     }
 
     .sp-count small {
         color: var(--sp-muted);
-        font-size: 10px;
+        font-size: 11.5px;
+        font-weight: 600;
     }
 
     /* PANEL FILTER */
     .sp-filter-panel {
-        padding: 21px;
+        padding: 22px 24px;
         border: 1px solid var(--sp-border);
         border-radius: 16px;
-        background: #fff;
-        box-shadow: 0 7px 24px rgba(67,39,101,.045);
+        background: #FFFFFF;
+        box-shadow: 0 4px 18px rgba(67, 39, 101, 0.04);
+        margin-bottom: 24px;
     }
 
     .sp-search-field {
         display: flex;
         align-items: center;
-        gap: 10px;
-        min-height: 47px;
-        padding: 0 13px;
-        border: 1px solid #e4d9ef;
-        border-radius: 10px;
-        background: #fcfaff;
-        transition: border-color .2s, box-shadow .2s;
+        gap: 12px;
+        min-height: 48px;
+        padding: 0 16px;
+        border: 1px solid #E2D7ED;
+        border-radius: 12px;
+        background: #FCFAFF;
+        transition: all .2s ease;
     }
 
     .sp-search-field:focus-within {
         border-color: var(--sp-purple);
-        box-shadow: 0 0 0 3px rgba(101,69,142,.08);
+        background: #FFFFFF;
+        box-shadow: 0 0 0 3px rgba(91, 58, 142, 0.12);
     }
 
     .sp-search-icon {
         color: var(--sp-purple);
-        font-size: 25px;
-        line-height: 1;
+        flex-shrink: 0;
     }
 
     .sp-search-field input {
@@ -582,17 +589,18 @@
         outline: none;
         background: transparent;
         color: var(--sp-text);
-        font-size: 12px;
+        font-size: 13px;
+        font-family: inherit;
     }
 
     .sp-search-field input::placeholder {
-        color: #a398b1;
+        color: #A396B2;
     }
 
     .sp-filter-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
-        gap: 13px;
+        gap: 14px;
         align-items: end;
         margin-top: 16px;
     }
@@ -601,65 +609,89 @@
         grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
     }
 
+    @media (max-width: 900px) {
+        .sp-filter-grid,
+        .sp-filter-grid.with-status {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 550px) {
+        .sp-filter-grid,
+        .sp-filter-grid.with-status {
+            grid-template-columns: 1fr;
+        }
+    }
+
     .sp-filter-field {
         min-width: 0;
     }
 
     .sp-filter-field label {
         display: block;
-        margin-bottom: 8px;
-        color: #645472;
-        font-size: 11px;
-        font-weight: 800;
+        margin-bottom: 6px;
+        color: #55486B;
+        font-size: 11.5px;
+        font-weight: 700;
     }
 
     .sp-filter-field select {
         width: 100%;
         min-width: 0;
         min-height: 42px;
-        padding: 0 10px;
-        border: 1px solid #e7dfed;
-        border-radius: 9px;
+        padding: 0 12px;
+        border: 1px solid #E5DCED;
+        border-radius: 10px;
         outline: none;
-        background: #fff;
+        background: #FFFFFF;
         color: var(--sp-text);
-        font-size: 11px;
+        font-size: 12.5px;
+        font-family: inherit;
+        transition: all .2s;
     }
 
     .sp-filter-field select:focus {
         border-color: var(--sp-purple);
-        box-shadow: 0 0 0 3px rgba(101,69,142,.07);
+        box-shadow: 0 0 0 3px rgba(91, 58, 142, 0.1);
     }
 
     .sp-reset-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
         min-height: 42px;
-        padding: 0 15px;
-        border: 1px solid #d9c8e9;
-        border-radius: 9px;
-        background: var(--sp-purple-light);
+        padding: 0 16px;
+        border: 1px solid #DFD2ED;
+        border-radius: 10px;
+        background: #FAF7FD;
         color: var(--sp-purple);
         cursor: pointer;
-        font-size: 11px;
-        font-weight: 800;
+        font-size: 12px;
+        font-weight: 700;
+        font-family: inherit;
         white-space: nowrap;
-        transition: .2s;
+        transition: all .2s ease;
     }
 
     .sp-reset-button:hover {
+        background: #EDE4F8;
         border-color: var(--sp-purple);
-        background: var(--sp-purple);
-        color: #fff;
+        color: var(--sp-purple-dark);
+        transform: translateY(-1px);
     }
 
     /* HASIL PENCARIAN */
     .sp-results-heading {
         display: flex;
         align-items: center;
-        gap: 13px;
-        margin: 27px 0 15px;
-        color: var(--sp-purple-dark);
-        font-size: 12px;
-        font-weight: 800;
+        gap: 14px;
+        margin: 24px 0 16px;
+        color: #4C3C63;
+        font-size: 12.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
     .sp-results-line {
@@ -670,33 +702,37 @@
 
     .sp-results-table-wrap {
         overflow-x: auto;
-        border: 1px solid var(--sp-border);
-        border-radius: 15px;
-        background: #fff;
-        box-shadow: 0 7px 24px rgba(67,39,101,.045);
+        border: 1px solid #EFE9F6;
+        border-radius: 14px;
+        background: #FFFFFF;
+        box-shadow: 0 4px 18px rgba(67, 39, 101, 0.04);
     }
 
     .sp-results-table {
         width: 100%;
-        min-width: 680px;
+        min-width: 720px;
         border-collapse: collapse;
-        font-size: 12px;
-    }
-
-    .sp-results-table th,
-    .sp-results-table td {
-        padding: 14px 16px;
-        border-bottom: 1px solid var(--sp-border);
+        font-size: 13px;
         text-align: left;
-        vertical-align: middle;
     }
 
     .sp-results-table th {
-        background: #f8f4fc;
-        color: var(--sp-purple-dark);
-        font-size: 11px;
-        font-weight: 800;
+        background: #F9F7FC;
+        color: #55486B;
+        font-weight: 700;
+        font-size: 11.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        padding: 13px 18px;
+        border-bottom: 1px solid #EAE1F3;
         white-space: nowrap;
+    }
+
+    .sp-results-table td {
+        padding: 14px 18px;
+        border-bottom: 1px solid #F1EBF7;
+        color: #382C4E;
+        vertical-align: middle;
     }
 
     .sp-results-table tbody tr:last-child td {
@@ -704,400 +740,242 @@
     }
 
     .sp-results-table tbody tr:hover {
-        background: #fcfaff;
+        background: #FAF8FD;
     }
 
     .sp-table-name {
-        color: var(--sp-purple-dark);
-        font-weight: 800;
+        font-weight: 700;
+        color: #23163A;
+        font-size: 13.5px;
+        margin-bottom: 2px;
     }
 
     .sp-table-subtitle {
-        margin-top: 4px;
-        color: var(--sp-muted);
-        font-size: 10px;
-        line-height: 1.6;
+        color: #7A6F8C;
+        font-size: 11.5px;
+        line-height: 1.5;
+    }
+
+    .sp-level-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 9px;
+        border-radius: 6px;
+        font-size: 11.5px;
+        font-weight: 600;
+        background: #F3EDFA;
+        color: #523483;
+        border: 1px solid #E5D9F3;
     }
 
     .sp-table-status {
-        display: inline-block;
-        padding: 6px 9px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
         border-radius: 20px;
-        background: #fff4d7;
-        color: #826219;
-        font-size: 10px;
-        font-weight: 800;
+        font-size: 11.5px;
+        font-weight: 700;
         white-space: nowrap;
+    }
+
+    .sp-status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+    }
+
+    .sp-table-status.pending {
+        background: #FEF3C7;
+        color: #92400E;
+        border: 1px solid #FDE68A;
+    }
+    .sp-table-status.pending .sp-status-dot {
+        background: #D97706;
     }
 
     .sp-table-status.approved {
-        background: #e4f5e8;
-        color: #28653d;
+        background: #D1FAE5;
+        color: #065F46;
+        border: 1px solid #A7F3D0;
     }
-
-    .sp-table-status.revision {
-        background: #fceedf;
-        color: #92531d;
+    .sp-table-status.approved .sp-status-dot {
+        background: #059669;
     }
 
     .sp-table-status.rejected {
-        background: #fbe8ea;
-        color: #9d3948;
+        background: #FEE2E2;
+        color: #991B1B;
+        border: 1px solid #FECACA;
+    }
+    .sp-table-status.rejected .sp-status-dot {
+        background: #DC2626;
     }
 
-    .sp-table-detail-button {
-        padding: 8px 11px;
-        border: 1px solid #e2d5ef;
-        border-radius: 8px;
-        background: #f8f4fc;
-        color: var(--sp-purple);
-        cursor: pointer;
-        font: inherit;
-        font-size: 10px;
-        font-weight: 800;
-        white-space: nowrap;
+    .sp-table-status.revision {
+        background: #FEF9C3;
+        color: #854D0E;
+        border: 1px solid #FEF08A;
+    }
+    .sp-table-status.revision .sp-status-dot {
+        background: #CA8A04;
     }
 
     .sp-table-actions {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 10px;
-        min-width: 112px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: flex-end;
+    }
+
+    .sp-table-detail-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 12px;
+        border-radius: 7px;
+        font-size: 11.5px;
+        font-weight: 700;
+        font-family: inherit;
+        background: #FAF7FD;
+        border: 1px solid #DFD2ED;
+        color: var(--sp-purple);
+        cursor: pointer;
+        transition: all 0.15s ease;
     }
 
     .sp-table-detail-button:hover {
+        background: #EDE4F8;
         border-color: var(--sp-purple);
-        background: var(--sp-purple);
-        color: #fff;
+        color: var(--sp-purple-dark);
+        transform: translateY(-1px);
     }
 
     .sp-table-edit-link {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        gap: 6px;
-        width: auto;
-        min-height: 34px;
-        padding: 0 12px;
-        border: 1px solid #ead8a8;
-        border-radius: 8px;
-        background: #fffaf0;
-        color: #8a6824;
-        font-size: 11px;
-        font-weight: 800;
-        line-height: 1.3;
+        gap: 5px;
+        padding: 6px 12px;
+        border-radius: 7px;
+        font-size: 11.5px;
+        font-weight: 700;
         text-decoration: none;
-        white-space: nowrap;
-        transition: background-color .18s ease, border-color .18s ease, transform .15s ease;
+        background: #FFF7ED;
+        border: 1px solid #FED7AA;
+        color: #C2410C;
+        transition: all 0.15s ease;
     }
 
     .sp-table-edit-link:hover {
-        border-color: #d5b65f;
-        background: #f9efd5;
-        color: #6c4e12;
+        background: #FFEDD5;
+        border-color: #FB923C;
         transform: translateY(-1px);
     }
 
-    .sp-table-edit-link svg {
-        width: 14px;
-        height: 14px;
-        flex: 0 0 14px;
-    }
-
-    .sp-prestasi-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        align-items: stretch;
-        gap: 17px;
-    }
-
-    /* KARTU PRESTASI */
-    .sp-prestasi-card {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-        padding: 21px;
-        border: 1px solid var(--sp-border);
-        border-radius: 15px;
-        background: #fff;
-        box-shadow: 0 5px 18px rgba(67,39,101,.035);
-        transition: transform .2s, box-shadow .2s, border-color .2s;
-    }
-
-    .sp-prestasi-card::before {
-        position: absolute;
-        top: -1px;
-        right: 18px;
-        left: 18px;
-        height: 3px;
-        border-radius: 0 0 5px 5px;
-        background: var(--sp-gold);
-        content: "";
-    }
-
-    .sp-prestasi-card:hover {
-        transform: translateY(-3px);
-        border-color: #d7c5e8;
-        box-shadow: 0 10px 25px rgba(67,39,101,.085);
-    }
-
-    .sp-card-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
-        min-height: 27px;
-    }
-
-    .sp-level-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        max-width: 75%;
-        padding: 7px 10px;
-        border: 1px solid #e6d9f2;
-        border-radius: 30px;
-        background: #f7f2fc;
-        color: var(--sp-purple);
-        font-size: 10px;
-        font-weight: 800;
-        overflow-wrap: anywhere;
-    }
-
-    .sp-badge-dot {
-        width: 6px;
-        height: 6px;
-        flex-shrink: 0;
-        border-radius: 50%;
-        background: var(--sp-gold);
-    }
-
-    .sp-year {
-        color: #9588a5;
-        font-size: 11px;
-        font-weight: 700;
-    }
-
-    .sp-card-icon {
-        display: grid;
-        place-items: center;
-        width: 40px;
-        height: 40px;
-        margin: 18px 0 13px;
-        border: 1px solid #eadff4;
-        border-radius: 12px;
-        background: linear-gradient(145deg, #f7f2fc, #eee4f7);
-        color: var(--sp-gold);
-        font-size: 24px;
-    }
-
-    .sp-prestasi-card h3 {
-        margin: 0;
-        color: var(--sp-purple-dark);
-        font-size: 15px;
-        font-weight: 800;
-        line-height: 1.6;
-        overflow-wrap: anywhere;
-    }
-
-    .sp-card-divider {
-        height: 1px;
-        margin: 16px 0;
-        background: #f0eaf5;
-    }
-
-    .sp-detail-label {
-        display: block;
-        margin-bottom: 9px;
-        color: #a094b0;
-        font-size: 9px;
-        font-weight: 800;
-        letter-spacing: 1px;
-    }
-
-    .sp-member-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-    }
-
-    .sp-member {
-        max-width: 100%;
-        padding: 6px 9px;
-        border-radius: 7px;
-        background: #f5effb;
-        color: #5c437c;
-        font-size: 10px;
-        overflow-wrap: anywhere;
-    }
-
-    .sp-muted {
-        color: var(--sp-muted);
-        font-size: 11px;
-        line-height: 1.7;
-    }
-
-    .sp-card-meta {
-        display: grid;
-        gap: 10px;
-        margin: 18px 0;
-    }
-
-    .sp-meta-row {
-        display: flex;
-        align-items: flex-start;
-        gap: 9px;
-        color: #776b85;
-        font-size: 11px;
-        line-height: 1.7;
-        overflow-wrap: anywhere;
-    }
-
-    .sp-meta-icon {
-        width: 15px;
-        flex-shrink: 0;
-        color: var(--sp-gold);
-        font-size: 14px;
-        font-weight: 800;
-        line-height: 1.4;
-    }
-
-    /* STATUS */
-    .sp-auth-status {
-        align-self: flex-start;
-        margin: 0 0 13px;
-        padding: 7px 10px;
-        border-radius: 20px;
-        font-size: 10px;
-        font-weight: 800;
-    }
-
-    .sp-auth-status.pending {
-        background: #fff4d7;
-        color: #826219;
-    }
-
-    .sp-auth-status.approved {
-        background: #e4f5e8;
-        color: #28653d;
-    }
-
-    .sp-auth-status.revision {
-        background: #fceedf;
-        color: #92531d;
-    }
-
-    .sp-auth-status.rejected {
-        background: #fbe8ea;
-        color: #9d3948;
-    }
-
-    /* TOMBOL DETAIL */
-    .sp-detail-button {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        width: 100%;
-        min-height: 42px;
-        margin-top: auto;
-        padding: 0 13px;
-        border: 1px solid #e2d5ef;
-        border-radius: 9px;
-        background: #f8f4fc;
-        color: var(--sp-purple);
-        cursor: pointer;
-        font-size: 11px;
-        font-weight: 800;
-        transition: .2s;
-    }
-
-    .sp-detail-button span {
-        color: var(--sp-gold);
-        font-size: 17px;
-    }
-
-    .sp-detail-button:hover {
-        border-color: var(--sp-purple);
-        background: var(--sp-purple);
-        color: #fff;
-    }
-
-    /* PESAN KOSONG */
+    /* EMPTY STATE */
     .sp-empty-state {
-        grid-column: 1 / -1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 45px 20px;
-        border: 1px dashed #d8c7e9;
-        border-radius: 16px;
-        background: #fbf8fe;
+        padding: 48px 20px;
         text-align: center;
+        background: #FFFFFF;
+        border: 1px solid var(--sp-border);
+        border-radius: 16px;
+        margin-top: 16px;
     }
 
     .sp-empty-icon {
-        display: grid;
-        place-items: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         width: 52px;
         height: 52px;
-        margin-bottom: 13px;
-        border-radius: 16px;
-        background: #eee5f7;
-        color: var(--sp-gold);
-        font-size: 27px;
+        border-radius: 50%;
+        background: #F4EFFB;
+        color: var(--sp-purple);
+        margin-bottom: 14px;
     }
 
     .sp-empty-state h3 {
-        margin: 0 0 8px;
-        color: var(--sp-purple-dark);
+        margin: 0 0 6px;
+        font-family: 'Poppins', sans-serif;
+        color: #2D1A47;
         font-size: 16px;
+        font-weight: 700;
     }
 
     .sp-empty-state p {
-        max-width: 420px;
         margin: 0;
         color: var(--sp-muted);
-        font-size: 12px;
-        line-height: 1.8;
+        font-size: 13px;
     }
 
-    /* MODAL */
+    /* MODAL DETAIL PRESTASI */
     .sp-detail-modal {
         position: fixed;
-        z-index: 9999;
         inset: 0;
-        display: none;
+        z-index: 1000;
+        display: flex;
         align-items: center;
         justify-content: center;
         padding: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
     }
 
     .sp-detail-modal.is-open {
-        display: flex;
+        opacity: 1;
+        visibility: visible;
     }
 
     .sp-modal-backdrop {
         position: absolute;
         inset: 0;
-        background: rgba(35,22,49,.57);
-        backdrop-filter: blur(4px);
+        background: rgba(36, 22, 56, 0.45);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
     }
 
     .sp-modal-box {
         position: relative;
-        z-index: 1;
-        width: min(100%, 570px);
-        max-height: calc(100vh - 40px);
+        width: 100%;
+        max-width: 680px;
+        max-height: 88vh;
         overflow-y: auto;
-        padding: 30px;
-        border: 1px solid #e8def2;
-        border-radius: 19px;
-        background: #fff;
-        box-shadow: 0 24px 70px rgba(26,15,40,.24);
+        background: #FFFFFF;
+        border-radius: 18px;
+        border: 1px solid #ECE4F4;
+        box-shadow: 0 20px 45px rgba(45, 26, 71, 0.2);
+        padding: 28px 32px;
+        z-index: 10;
+        transform: translateY(12px) scale(0.98);
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sp-detail-modal.is-open .sp-modal-box {
+        transform: translateY(0) scale(1);
+    }
+
+    .sp-modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid #EAE1F3;
+        background: #FAF7FD;
+        color: #655874;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s ease;
+    }
+
+    .sp-modal-close:hover {
+        background: #F2EBF9;
+        color: var(--sp-purple);
+        transform: rotate(90deg);
     }
 
     .sp-modal-heading {
@@ -1105,179 +983,52 @@
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        padding-right: 48px;
+        margin-bottom: 6px;
+        padding-right: 40px;
     }
 
-    .sp-modal-heading .sp-section-kicker {
-        margin: 0;
+    .sp-modal-box h2 {
+        margin: 6px 0 8px;
+        font-family: 'Poppins', sans-serif;
+        color: #241638;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.3;
+    }
+
+    .sp-modal-intro {
+        margin: 0 0 22px;
+        color: #7A6F8C;
+        font-size: 13px;
+        line-height: 1.5;
+        border-bottom: 1px solid #F1EBF7;
+        padding-bottom: 16px;
     }
 
     .sp-modal-status {
         display: inline-flex;
         align-items: center;
-        padding: 7px 11px;
-        border-radius: 999px;
-        font-size: 10px;
-        font-weight: 800;
-        white-space: nowrap;
-    }
-
-    .sp-modal-status.pending {
-        background: #fff4d7;
-        color: #826219;
-    }
-
-    .sp-modal-status.approved {
-        background: #e4f5e8;
-        color: #28653d;
-    }
-
-    .sp-modal-status.rejected {
-        background: #fbe8ea;
-        color: #9d3948;
-    }
-
-    .sp-modal-status.revision {
-        background: #fceedf;
-        color: #92531d;
-    }
-
-    .sp-modal-evidence,
-    .sp-modal-note {
-        grid-column: 1 / -1;
-        min-width: 0;
-        padding: 15px;
-        border: 1px solid #eee6f5;
-        border-radius: 10px;
-        background: #fcfaff;
-    }
-
-    .sp-modal-evidence h3,
-    .sp-modal-note h3 {
-        margin: 0 0 11px;
-        color: var(--sp-purple-dark);
-        font-size: 12px;
-    }
-
-    .sp-modal-evidence-list {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 9px;
-    }
-
-    .sp-modal-evidence-card {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        min-width: 0;
-        padding: 9px;
-        border: 1px solid #eee6f5;
-        border-radius: 9px;
-        background: #fff;
-        color: var(--sp-purple-dark);
-        text-decoration: none;
-        transition: border-color .2s, transform .2s;
-    }
-
-    .sp-modal-evidence-card:hover {
-        border-color: var(--sp-gold);
-        transform: translateY(-1px);
-    }
-
-    .sp-modal-evidence-card img,
-    .sp-modal-file-type {
-        display: grid;
-        place-items: center;
-        flex: 0 0 54px;
-        width: 54px;
-        height: 54px;
-        border-radius: 7px;
-        background: #f3edf9;
-        object-fit: cover;
-    }
-
-    .sp-modal-file-type {
-        color: var(--sp-purple);
+        padding: 4px 10px;
+        border-radius: 20px;
         font-size: 11px;
-        font-weight: 800;
+        font-weight: 700;
     }
-
-    .sp-modal-file-info {
-        display: grid;
-        gap: 4px;
-        min-width: 0;
-    }
-
-    .sp-modal-file-info strong,
-    .sp-modal-file-info small {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .sp-modal-file-info strong {
-        font-size: 10px;
-    }
-
-    .sp-modal-file-info small,
-    .sp-modal-empty {
-        color: var(--sp-muted);
-        font-size: 10px;
-    }
-
-    .sp-modal-empty,
-    .sp-modal-note p {
-        margin: 0;
-        line-height: 1.7;
-        overflow-wrap: anywhere;
-    }
-
-    .sp-modal-close {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        display: grid;
-        place-items: center;
-        width: 35px;
-        height: 35px;
-        border: 1px solid #e8def2;
-        border-radius: 10px;
-        background: #f8f4fc;
-        color: var(--sp-purple);
-        cursor: pointer;
-        font-size: 24px;
-    }
-
-    .sp-modal-box h2 {
-        margin: 13px 40px 8px 0;
-        color: var(--sp-purple-dark);
-        font-size: 24px;
-        line-height: 1.4;
-        overflow-wrap: anywhere;
-    }
-
-    .sp-modal-intro {
-        margin: 0 0 21px;
-        color: var(--sp-muted);
-        font-size: 12px;
-        line-height: 1.7;
-    }
+    .sp-modal-status.pending { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+    .sp-modal-status.approved { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
+    .sp-modal-status.rejected { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+    .sp-modal-status.revision { background: #FEF9C3; color: #854D0E; border: 1px solid #FEF08A; }
 
     .sp-modal-details {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 11px;
+        gap: 14px 18px;
     }
 
     .sp-modal-detail-item {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        min-width: 0;
-        padding: 14px;
-        border: 1px solid #eee6f5;
+        background: #FBF9FD;
+        border: 1px solid #EFE9F6;
         border-radius: 10px;
-        background: #fcfaff;
+        padding: 10px 14px;
     }
 
     .sp-modal-detail-item.full-width {
@@ -1285,131 +1036,132 @@
     }
 
     .sp-modal-detail-item span {
-        color: #9487a4;
-        font-size: 10px;
-        font-weight: 700;
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        color: #7D7090;
+        margin-bottom: 3px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
     .sp-modal-detail-item strong {
-        color: var(--sp-purple-dark);
-        font-size: 12px;
-        line-height: 1.7;
+        display: block;
+        font-size: 13px;
+        color: #26193D;
+        line-height: 1.5;
         white-space: pre-line;
-        overflow-wrap: anywhere;
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 1200px) {
-        .sp-filter-grid,
-        .sp-filter-grid.with-status {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .sp-reset-button {
-            width: 100%;
-        }
+    .sp-modal-evidence {
+        grid-column: 1 / -1;
+        margin-top: 10px;
     }
 
-    @media (max-width: 1050px) {
-        .sp-prestasi-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
+    .sp-modal-evidence h3,
+    .sp-modal-note h3 {
+        margin: 0 0 10px;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: #3C2E52;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
-    @media (max-width: 760px) {
-        .sp-public-page {
-            padding-top: 20px;
-        }
-
-        .sp-prestasi-grid {
-            grid-template-columns: 1fr;
-        }
+    .sp-modal-evidence-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 10px;
     }
 
-    @media (max-width: 620px) {
-        .sp-hero {
-            min-height: 220px;
-            padding: 28px 20px;
-            border-radius: 17px;
-        }
+    .sp-modal-evidence-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #E6DCF0;
+        background: #FAF7FD;
+        text-decoration: none;
+        color: var(--sp-purple);
+        font-size: 12px;
+        font-weight: 600;
+        transition: all 0.15s ease;
+    }
 
-        .sp-hero h1 {
-            max-width: 300px;
-            font-size: 34px;
-        }
+    .sp-modal-evidence-card:hover {
+        background: #EDE2F8;
+        border-color: var(--sp-purple);
+        transform: translateY(-1px);
+    }
 
-        .sp-hero p {
-            max-width: 300px;
-            font-size: 12px;
-        }
+    .sp-modal-evidence-card img {
+        width: 36px;
+        height: 36px;
+        border-radius: 6px;
+        object-fit: cover;
+    }
 
-        .sp-section-heading {
-            align-items: flex-start;
-        }
+    .sp-modal-file-type {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 6px;
+        background: #FEE2E2;
+        color: #B91C1C;
+        font-size: 10px;
+        font-weight: 800;
+        flex-shrink: 0;
+    }
 
-        .sp-section-heading h2 {
-            font-size: 20px;
-        }
+    .sp-modal-file-info {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
 
-        .sp-section-heading p {
-            font-size: 11px;
-        }
+    .sp-modal-file-info strong {
+        font-size: 12px;
+        color: #241638;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
-        .sp-count {
-            flex-direction: column;
-            gap: 3px;
-            padding: 9px;
-        }
+    .sp-modal-file-info small {
+        color: var(--sp-purple);
+        font-size: 11px;
+    }
 
-        .sp-count span {
-            font-size: 19px;
-        }
+    .sp-modal-empty {
+        margin: 0;
+        color: var(--sp-muted);
+        font-size: 12px;
+        font-style: italic;
+    }
 
-        .sp-count small {
-            font-size: 9px;
-            text-align: center;
-        }
+    .sp-modal-note {
+        grid-column: 1 / -1;
+        margin-top: 10px;
+        padding: 14px 16px;
+        border-radius: 10px;
+        background: #FFFBEB;
+        border: 1px solid #FDE68A;
+        border-left: 4px solid #D97706;
+    }
 
-        .sp-filter-panel {
-            padding: 15px;
-        }
+    .sp-modal-note h3 {
+        color: #92400E;
+        margin-bottom: 4px;
+    }
 
-        .sp-filter-grid,
-        .sp-filter-grid.with-status {
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-
-        .sp-prestasi-grid {
-            grid-template-columns: 1fr;
-            gap: 14px;
-        }
-
-        .sp-prestasi-card {
-            padding: 20px;
-        }
-
-        .sp-modal-box {
-            padding: 26px 18px 20px;
-        }
-
-        .sp-modal-box h2 {
-            font-size: 21px;
-        }
-
-        .sp-modal-details {
-            grid-template-columns: 1fr;
-        }
-
-        .sp-modal-heading {
-            align-items: flex-start;
-            flex-direction: column;
-            padding-right: 42px;
-        }
-
-        .sp-modal-evidence-list {
-            grid-template-columns: 1fr;
-        }
+    .sp-modal-note p {
+        margin: 0;
+        color: #78350F;
+        font-size: 12.5px;
+        line-height: 1.5;
     }
 </style>
 
@@ -1421,94 +1173,86 @@
         const filterTahun = document.getElementById('filterTahun');
         const filterStatus = document.getElementById('filterStatus');
         const resetButton = document.getElementById('resetFilter');
-        const cards = [...document.querySelectorAll('.sp-prestasi-row')];
+        const countBadge = document.getElementById('prestasiCount');
         const emptyState = document.getElementById('prestasiEmpty');
-        const emptyTitle = document.getElementById('prestasiEmptyTitle');
-        const emptyDescription = document.getElementById('prestasiEmptyDescription');
-        const count = document.getElementById('prestasiCount');
+        const tableWrap = document.querySelector('.sp-results-table-wrap');
+        const rows = Array.from(document.querySelectorAll('.sp-prestasi-row'));
 
         function applyFilters() {
-            const search = (searchInput.value || '').trim().toLowerCase();
+            const query = (searchInput.value || '').trim().toLowerCase();
             const kategori = filterKategori.value;
             const tingkat = filterTingkat.value;
             const tahun = filterTahun.value;
             const status = filterStatus ? filterStatus.value : '';
 
-            let visible = 0;
+            let visibleCount = 0;
 
-            cards.forEach((card) => {
-                const matchesSearch =
-                    (card.dataset.search || '').toLowerCase().includes(search);
+            rows.forEach((row) => {
+                const rowKategori = row.dataset.kategori;
+                const rowTingkat = row.dataset.tingkat;
+                const rowTahun = row.dataset.tahun;
+                const rowStatus = row.dataset.status;
+                const rowSearch = row.dataset.search || '';
 
-                const matchesKategori =
-                    !kategori || card.dataset.kategori === kategori;
+                const matchesQuery = !query || rowSearch.includes(query);
+                const matchesKategori = !kategori || rowKategori === kategori;
+                const matchesTingkat = !tingkat || rowTingkat === tingkat;
+                const matchesTahun = !tahun || rowTahun === tahun;
+                const matchesStatus = !status || rowStatus === status;
 
-                const matchesTingkat =
-                    !tingkat || card.dataset.tingkat === tingkat;
-
-                const matchesTahun =
-                    !tahun || card.dataset.tahun === tahun;
-
-                const matchesStatus =
-                    !status || card.dataset.status === status;
-
-                const show =
-                    matchesSearch &&
+                const isVisible =
+                    matchesQuery &&
                     matchesKategori &&
                     matchesTingkat &&
                     matchesTahun &&
                     matchesStatus;
 
-                card.style.display = show ? '' : 'none';
+                row.style.display = isVisible ? '' : 'none';
 
-                if (show) {
-                    visible++;
+                if (isVisible) {
+                    visibleCount += 1;
                 }
             });
 
-            count.textContent = visible;
+            if (countBadge) {
+                countBadge.textContent = visibleCount;
+            }
 
-            if (visible === 0) {
-                emptyState.style.display = 'flex';
-
-                if (cards.length === 0) {
-                    emptyTitle.textContent = @json($pesanKosong);
-
-                    emptyDescription.textContent =
-                        'Data prestasi yang tersedia akan ditampilkan di halaman ini.';
+            if (emptyState && tableWrap) {
+                if (visibleCount === 0) {
+                    tableWrap.style.display = 'none';
+                    emptyState.style.display = 'block';
                 } else {
-                    emptyTitle.textContent = 'Prestasi tidak ditemukan';
-
-                    emptyDescription.textContent =
-                        'Coba ubah kata kunci atau pilihan filter.';
+                    tableWrap.style.display = '';
+                    emptyState.style.display = 'none';
                 }
-            } else {
-                emptyState.style.display = 'none';
             }
         }
 
-        [searchInput, filterKategori, filterTingkat, filterTahun]
-            .forEach((element) => {
-                element.addEventListener('input', applyFilters);
-                element.addEventListener('change', applyFilters);
-            });
+        [searchInput, filterKategori, filterTingkat, filterTahun].forEach((el) => {
+            if (!el) return;
+            el.addEventListener('input', applyFilters);
+            el.addEventListener('change', applyFilters);
+        });
 
         if (filterStatus) {
             filterStatus.addEventListener('change', applyFilters);
         }
 
-        resetButton.addEventListener('click', () => {
-            searchInput.value = '';
-            filterKategori.value = '';
-            filterTingkat.value = '';
-            filterTahun.value = '';
+        if (resetButton) {
+            resetButton.addEventListener('click', () => {
+                searchInput.value = '';
+                filterKategori.value = '';
+                filterTingkat.value = '';
+                filterTahun.value = '';
 
-            if (filterStatus) {
-                filterStatus.value = '';
-            }
+                if (filterStatus) {
+                    filterStatus.value = '';
+                }
 
-            applyFilters();
-        });
+                applyFilters();
+            });
+        }
 
         applyFilters();
     })();
@@ -1536,8 +1280,7 @@
         document.getElementById('modalPeringkat').textContent = peringkat || '-';
         document.getElementById('modalTahun').textContent = tahun || '-';
 
-        document.getElementById('modalPenyelenggara').textContent =
-            penyelenggara || '-';
+        document.getElementById('modalPenyelenggara').textContent = penyelenggara || '-';
         document.getElementById('modalDeskripsi').textContent = deskripsi || '-';
 
         const statusBadge = document.getElementById('modalStatus');
@@ -1590,7 +1333,6 @@
         }
 
         const modal = document.getElementById('prestasiModal');
-
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
@@ -1598,7 +1340,6 @@
 
     function closePrestasiDetail() {
         const modal = document.getElementById('prestasiModal');
-
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';

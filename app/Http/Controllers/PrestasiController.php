@@ -80,13 +80,21 @@ class PrestasiController extends Controller
     }
     public function detailPublik(Prestasi $prestasi)
     {
-        abort_unless($prestasi->status === 'disetujui', 404);
+        $user = auth()->user();
+        $isOwnerOrMember = $user && (
+            $prestasi->anggota()->whereHas('sivitas', fn ($q) => $q->where('user_id', $user->id))->exists()
+            || ($user->nim_nip && $prestasi->anggota()->where('nim_nip', $user->nim_nip)->exists())
+        );
+        $isAdmin = $user && in_array($user->role, ['admin', 'super_admin'], true);
+
+        abort_unless($prestasi->status === 'disetujui' || $isAdmin || $isOwnerOrMember, 404);
 
         $prestasi->load([
             'kategori',
             'tingkat',
             'anggota.sivitas.user',
             'bukti',
+            'verifikasi',
         ]);
 
         // The public detail page is presented as a participant profile. Keep
@@ -165,13 +173,21 @@ class PrestasiController extends Controller
     }
     public function detailSatuPrestasiPublik(Request $request, Prestasi $prestasi)
     {
-        abort_unless($prestasi->status === 'disetujui', 404);
+        $user = $request->user();
+        $isOwnerOrMember = $user && (
+            $prestasi->anggota()->whereHas('sivitas', fn ($q) => $q->where('user_id', $user->id))->exists()
+            || ($user->nim_nip && $prestasi->anggota()->where('nim_nip', $user->nim_nip)->exists())
+        );
+        $isAdmin = $user && in_array($user->role, ['admin', 'super_admin'], true);
+
+        abort_unless($prestasi->status === 'disetujui' || $isAdmin || $isOwnerOrMember, 404);
 
         $prestasi->load([
             'kategori',
             'tingkat',
             'anggota.sivitas.user',
             'bukti',
+            'verifikasi',
         ]);
 
         $kembali = $request->query('kembali');
@@ -419,6 +435,7 @@ class PrestasiController extends Controller
         $prestasi->load([
             'anggota.sivitas.user',
             'bukti',
+            'verifikasi',
         ]);
 
         $kategoris = KategoriPrestasi::orderBy('nama_kategori')->get();

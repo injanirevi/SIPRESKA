@@ -8,7 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -16,7 +16,7 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .sidebar, .sidebar * { font-family: Arial, sans-serif; }
+        .sidebar, .sidebar * { font-family: 'Plus Jakarta Sans', sans-serif; }
 
         :root {
             --purple: #5B3A8E;
@@ -106,42 +106,42 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 14px;
+            padding: 11px 14px;
             border: 1px solid transparent;
-            border-radius: 9px;
+            border-radius: 10px;
             color: #655B73;
             text-decoration: none;
             font-size: 13px;
+            font-weight: 500;
             line-height: 1.5;
-            transition: background .2s, color .2s;
+            transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .menu a:hover,
-        .menu a.active {
-            background: linear-gradient(110deg,#F0EAF8,#E3D5F3);
+        .menu a:hover {
+            background: #FAF7FD;
             color: var(--purple);
+            transform: translateX(3px);
         }
 
         .menu a.active {
-            border-color: #E5D9F3;
-            box-shadow: inset 3px 0 0 var(--purple);
+            background: linear-gradient(135deg, #F3ECF9 0%, #EDE1F7 100%);
+            border-color: #E2D1F3;
+            color: var(--purple);
             font-weight: 700;
+            box-shadow: 0 2px 8px rgba(91, 58, 142, 0.08);
         }
 
         .menu-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 22px;
-            height: 22px;
+            width: 18px;
+            height: 18px;
             flex-shrink: 0;
-            border-radius: 7px;
-            background: #F5F0FA;
-            color: var(--purple);
-            font-size: 15px;
+            color: inherit;
         }
 
-        .menu a.active .menu-icon { background: #FFFFFF; }
+        .menu a.active .menu-icon { color: var(--purple); }
 
         .sidebar-counter-badge {
             margin-left: auto;
@@ -157,21 +157,31 @@
 
         .logout {
             margin-top: auto;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
+            padding-top: 24px;
         }
 
         .logout button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             width: 100%;
-            padding: 12px;
-            border: 0;
-            border-radius: 9px;
-            background: transparent;
-            color: #B64B57;
-            text-align: left;
-            font-size: 13px;
+            padding: 10px 14px;
+            border: 1px solid #F5D3D3;
+            border-radius: 10px;
+            background: #FFF5F5;
+            color: #B91C1C;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background .2s;
+            transition: all .2s ease;
+        }
+
+        .logout button:hover {
+            background: #FEE2E2;
+            border-color: #F87171;
+            transform: translateY(-1px);
         }
 
         .logout button:hover {
@@ -1719,7 +1729,7 @@
         </div>
 
         <div class="gold-line"></div>
-        <div class="menu-title">MENU ADMIN</div>
+        <div class="menu-title">{{ auth()->user()?->role === 'super_admin' ? 'MENU SUPER ADMIN' : 'MENU ADMIN' }}</div>
 
         <nav class="menu">
             <a
@@ -1784,7 +1794,10 @@
         <div class="logout">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit">Keluar dari Akun</button>
+                <button type="submit">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    <span>Keluar dari Akun</span>
+                </button>
             </form>
         </div>
     </aside>
@@ -1794,8 +1807,8 @@
 
         <header class="header">
             <div>
-                <div class="eyebrow">DASHBOARD ADMINISTRATOR</div>
-                <h1>Dashboard Admin</h1>
+                <div class="eyebrow">{{ auth()->user()?->role === 'super_admin' ? 'DASHBOARD SUPER ADMINISTRATOR' : 'DASHBOARD ADMINISTRATOR' }}</div>
+                <h1>{{ auth()->user()?->role === 'super_admin' ? 'Dashboard Super Admin' : 'Dashboard Admin' }}</h1>
                 <p>
                     Pantau ringkasan data sistem, perkembangan prestasi, serta pencarian peserta dan prestasi.
                 </p>
@@ -1803,7 +1816,7 @@
 
             <div class="profile">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--purple); flex-shrink: 0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                <span>{{ auth()->user()->admin?->nama ?? (auth()->user()?->role === 'super_admin' ? 'Super Admin' : 'Admin SIPRESKA') }}</span>
+                <span>{{ auth()->user()->admin?->nama ?? (auth()->user()?->role === 'super_admin' ? 'Super Administrator' : 'Admin SIPRESKA') }}</span>
             </div>
         </header>
 

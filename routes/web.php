@@ -398,6 +398,19 @@ Route::get('/dashboard', function () {
             }
         );
 
+        $prestasiTerbaru = (clone $prestasiMahasiswa)
+            ->with([
+                'kategori',
+                'tingkat',
+                'anggota.sivitas.user',
+                'bukti',
+                'verifikasi',
+            ])
+            ->orderByDesc('created_at')
+            ->orderByDesc('id')
+            ->take(5)
+            ->get();
+
         return view('dashboard.mahasiswa', [
             'totalPrestasiMahasiswa' => (clone $prestasiMahasiswa)
                 ->count(),
@@ -413,6 +426,8 @@ Route::get('/dashboard', function () {
             'prestasiDitolak' => (clone $prestasiMahasiswa)
                 ->where('status', 'ditolak')
                 ->count(),
+
+            'prestasiTerbaru' => $prestasiTerbaru,
         ]);
     }
 
@@ -455,6 +470,9 @@ Route::get('/dashboard', function () {
             ->with([
                 'kategori',
                 'tingkat',
+                'anggota.sivitas.user',
+                'bukti',
+                'verifikasi',
             ])
             ->orderByDesc('created_at')
             ->orderByDesc('id')
