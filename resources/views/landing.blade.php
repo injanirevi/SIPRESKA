@@ -361,12 +361,22 @@
 
             <div class="bar-chart">
 
-                <div class="chart-y-axis">
-                    <span>100%</span>
-                    <span>75%</span>
-                    <span>50%</span>
-                    <span>25%</span>
-                    <span>0</span>
+            @php
+                $maxRaw = max(1, (int) $jumlahMaksimalPrestasi);
+                $step = (int) max(1, ceil($maxRaw / 4));
+                $yAxisMax = $step * 4;
+                $y4 = $yAxisMax;
+                $y3 = $step * 3;
+                $y2 = $step * 2;
+                $y1 = $step * 1;
+                $y0 = 0;
+            @endphp
+                <div class="chart-y-axis" title="Jumlah Prestasi">
+                    <span>{{ $y4 }}</span>
+                    <span>{{ $y3 }}</span>
+                    <span>{{ $y2 }}</span>
+                    <span>{{ $y1 }}</span>
+                    <span>{{ $y0 }}</span>
                 </div>
 
                 <div class="chart-area">
@@ -384,10 +394,7 @@
                         @foreach ($trenPrestasi as $item)
 
                             @php
-                                $tinggiBar = (
-                                    $item['total'] /
-                                    $jumlahMaksimalPrestasi
-                                ) * 100;
+                                $tinggiBar = min(100, max(6, ($item['total'] / $yAxisMax) * 100));
                             @endphp
 
                             <div class="bar-group">

@@ -48,7 +48,14 @@ class PrestasiController extends Controller
             }
         }
 
-        return collect($peserta)->sortBy(fn ($item) => mb_strtolower($item['nama']))->values();
+        return collect($peserta)->sort(function ($a, $b) {
+            $totalA = $a['prestasis']->count();
+            $totalB = $b['prestasis']->count();
+            if ($totalA !== $totalB) {
+                return $totalB <=> $totalA; // Urutkan dari jumlah prestasi terbesar
+            }
+            return strcasecmp($a['nama'], $b['nama']);
+        })->values();
     }
 
     private function tampilkanDirektoriPeserta(string $judul, string $deskripsi, ?string $role = null)

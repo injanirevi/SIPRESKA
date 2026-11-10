@@ -252,9 +252,14 @@ Route::get('/mahasiswa-berprestasi', [
 ])->name('mahasiswa-berprestasi');
 
 Route::get('/ranking', function () {
-    $prestasiDisetujui = Prestasi::with('anggota.sivitas.user')
-        ->where('status', 'disetujui')
-        ->get();
+    $prestasiDisetujui = Prestasi::with([
+        'tingkat',
+        'kategori',
+        'bukti',
+        'anggota.sivitas.user',
+    ])
+    ->where('status', 'disetujui')
+    ->get();
 
     $jumlahPrestasiFakultas = [];
     $jumlahPrestasiProgramStudi = [];
@@ -292,9 +297,26 @@ Route::get('/ranking', function () {
             }
         }
 
+        $prestasiItem = [
+            'id' => $prestasi->id,
+            'nama_prestasi' => $prestasi->nama_prestasi,
+            'peringkat' => $prestasi->peringkat ?: 'Tidak dicantumkan',
+            'tingkat' => $prestasi->tingkat?->nama_tingkat ?? 'Umum',
+            'kategori' => $prestasi->kategori?->nama_kategori ?? 'Umum',
+            'tahun' => $prestasi->tahun ?: '—',
+            'penyelenggara' => $prestasi->penyelenggara ?: '—',
+            'peserta' => $prestasi->anggota->map(fn ($a) => $a->nama ?? $a->sivitas?->nama)->filter()->unique()->values()->join(', '),
+            'url' => route('prestasi.publik.rincian', $prestasi->id) . '?kembali=' . urlencode(request()->fullUrl()),
+        ];
+
         foreach ($fakultasPadaPrestasi as $key => $namaFakultas) {
-            $jumlahPrestasiFakultas[$key] ??= ['nama' => $namaFakultas, 'total' => 0];
+            $jumlahPrestasiFakultas[$key] ??= [
+                'nama' => $namaFakultas,
+                'total' => 0,
+                'prestasi' => [],
+            ];
             $jumlahPrestasiFakultas[$key]['total']++;
+            $jumlahPrestasiFakultas[$key]['prestasi'][] = $prestasiItem;
         }
 
         foreach ($programStudiPadaPrestasi as $key => $programStudi) {
@@ -302,8 +324,10 @@ Route::get('/ranking', function () {
                 'nama' => $programStudi['nama'],
                 'fakultas' => $programStudi['fakultas'],
                 'total' => 0,
+                'prestasi' => [],
             ];
             $jumlahPrestasiProgramStudi[$key]['total']++;
+            $jumlahPrestasiProgramStudi[$key]['prestasi'][] = $prestasiItem;
         }
     }
 

@@ -1,4 +1,4 @@
-@extends(auth()->check() ? 'layouts.app' : 'layouts.landing')
+@extends('layouts.landing')
 
 @section('title', $prestasi->nama_prestasi . ' - SIPRESKA')
 
@@ -27,27 +27,31 @@
         <a href="{{ $backUrl }}" class="public-profile-back">&larr; Kembali</a>
 
         <div class="achievement-detail-card">
-            <header class="achievement-detail-header">
-                <div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; flex-wrap: wrap;">
-                        <span class="eyebrow dark" style="margin: 0;">RINCIAN PENCAPAIAN</span>
-                        <span style="display: inline-flex; align-items: center; gap: 7px; padding: 4px 12px; border-radius: 20px; font-size: 11.5px; font-weight: 700; background: {{ $statusColor['bg'] }}; color: {{ $statusColor['text'] }}; border: 1px solid {{ $statusColor['border'] }};">
-                            <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ $statusColor['dot'] }};"></span>
-                            {{ $statusLabel }}
-                        </span>
-                    </div>
-                    <h1>{{ $prestasi->nama_prestasi }}</h1>
-                    <p>{{ $prestasi->penyelenggara ?: 'Informasi pencapaian sivitas akademika' }}</p>
+            <header class="achievement-detail-header" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 250px;">
+                    <span class="eyebrow dark">RINCIAN PENCAPAIAN</span>
+                    <h1 style="margin: 8px 0 6px;">{{ $prestasi->nama_prestasi }}</h1>
+                    <p style="margin: 0; color: #6B7280; font-size: 14px;">{{ $prestasi->penyelenggara ?: 'Informasi pencapaian sivitas akademika' }}</p>
+                </div>
+                <div style="flex-shrink: 0; padding-top: 4px;">
+                    <span style="display: inline-flex; align-items: center; gap: 7px; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; background: {{ $statusColor['bg'] }}; color: {{ $statusColor['text'] }}; border: 1px solid {{ $statusColor['border'] }}; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        <span style="width: 8px; height: 8px; border-radius: 50%; background: {{ $statusColor['dot'] }};"></span>
+                        {{ $statusLabel }}
+                    </span>
+                </div>
+            </header>
 
+            @if (!empty($catatanTerbaru) || $canEdit)
+                <div style="margin: 16px 0 24px;">
                     @if (!empty($catatanTerbaru))
-                        <div style="margin-top: 16px; padding: 14px 18px; border-radius: 12px; background: #FFFBEB; border: 1px solid #FDE68A; border-left: 4px solid #D97706;">
+                        <div style="margin-bottom: 12px; padding: 14px 18px; border-radius: 12px; background: #FFFBEB; border: 1px solid #FDE68A; border-left: 4px solid #D97706;">
                             <strong style="display: block; font-size: 13px; color: #92400E; margin-bottom: 4px;">Catatan dari Verifikator Sistem</strong>
                             <p style="margin: 0; font-size: 13px; color: #78350F; line-height: 1.5;">{{ $catatanTerbaru }}</p>
                         </div>
                     @endif
 
                     @if ($canEdit)
-                        <div style="margin-top: 16px;">
+                        <div>
                             <a href="{{ route('prestasi.edit', $prestasi) }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 10px; background: linear-gradient(135deg, #5B3A8E 0%, #432765 100%); color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 700; box-shadow: 0 4px 12px rgba(91, 58, 142, 0.25);">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
                                 <span>Perbaiki & Ajukan Kembali</span>
@@ -55,12 +59,12 @@
                         </div>
                     @endif
                 </div>
-            </header>
+            @endif
 
             <div class="achievement-detail-layout">
             <div class="achievement-detail-main">
                 <section class="achievement-detail-block">
-                    <div class="achievement-detail-block-heading"><span>01</span><div><h2>Informasi prestasi</h2><p>Ringkasan capaian yang tercatat di SIPRESKA.</p></div></div>
+                    <div class="achievement-detail-block-heading"><div><h2>Informasi prestasi</h2><p>Ringkasan capaian yang tercatat di SIPRESKA.</p></div></div>
                     <dl class="achievement-detail-facts">
                         <div><dt>Tahun perolehan</dt><dd>{{ $prestasi->tahun ?: '—' }}</dd></div>
                         <div><dt>Tingkat kompetisi</dt><dd>{{ $prestasi->tingkat?->nama_tingkat ?? 'Belum diisi' }}</dd></div>
@@ -72,7 +76,7 @@
                 </section>
 
                 <section class="achievement-detail-block">
-                    <div class="achievement-detail-block-heading"><span>02</span><div><h2>Peserta</h2><p>{{ $prestasi->anggota->count() }} sivitas terlibat dalam pencapaian ini.</p></div></div>
+                    <div class="achievement-detail-block-heading"><div><h2>Peserta</h2><p>{{ $prestasi->anggota->count() }} sivitas terlibat dalam pencapaian ini.</p></div></div>
                     <div class="achievement-participant-list">
                         @forelse ($prestasi->anggota as $anggota)
                             <div class="achievement-participant"><span class="achievement-participant-avatar">{{ \Illuminate\Support\Str::upper(\Illuminate\Support\Str::substr($anggota->nama ?? $anggota->sivitas?->nama ?? '?', 0, 1)) }}</span><div><strong>{{ $anggota->nama ?? $anggota->sivitas?->nama ?? 'Nama belum tersedia' }}</strong><span>{{ $anggota->peran === 'pengaju' ? 'Pengaju' : ($anggota->peran ?: 'Peserta') }}</span></div></div>
@@ -84,7 +88,7 @@
 
                 @if ($prestasi->deskripsi)
                     <section class="achievement-detail-block achievement-description-block">
-                        <div class="achievement-detail-block-heading"><span>03</span><div><h2>Tentang pencapaian</h2><p>Deskripsi singkat kegiatan atau hasil yang diraih.</p></div></div>
+                        <div class="achievement-detail-block-heading"><div><h2>Tentang pencapaian</h2><p>Deskripsi singkat kegiatan atau hasil yang diraih.</p></div></div>
                         <p>{{ $prestasi->deskripsi }}</p>
                     </section>
                 @endif

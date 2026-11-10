@@ -2309,14 +2309,24 @@
                 @if (isset($trenPrestasi) && $trenPrestasi->isNotEmpty())
                     <div class="trend-legend"><i></i> Jumlah Prestasi Disetujui</div>
                     <div class="trend-chart">
-                        <div class="trend-axis">
-                            <span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0</span>
+                        @php
+                            $maxAdminRaw = max(1, (int) ($jumlahMaksimalPrestasi ?? 1));
+                            $stepAdmin = (int) max(1, ceil($maxAdminRaw / 4));
+                            $yAdminMax = $stepAdmin * 4;
+                            $yA4 = $yAdminMax;
+                            $yA3 = $stepAdmin * 3;
+                            $yA2 = $stepAdmin * 2;
+                            $yA1 = $stepAdmin * 1;
+                            $yA0 = 0;
+                        @endphp
+                        <div class="trend-axis" title="Jumlah Prestasi">
+                            <span>{{ $yA4 }}</span><span>{{ $yA3 }}</span><span>{{ $yA2 }}</span><span>{{ $yA1 }}</span><span>{{ $yA0 }}</span>
                         </div>
                         <div class="trend-plot">
                             <div class="trend-grid"><span></span><span></span><span></span><span></span><span></span></div>
                             <div class="trend-bars" style="--bar-count: {{ $trenPrestasi->count() }}">
                                 @foreach ($trenPrestasi as $item)
-                                    @php $tinggiBar = ($item->total / $jumlahMaksimalPrestasi) * 100; @endphp
+                                    @php $tinggiBar = min(100, max(6, ($item->total / $yAdminMax) * 100)); @endphp
                                     <div class="trend-bar-group" data-year="{{ $item->tahun }}" data-total="{{ $item->total }}">
                                         <div class="trend-bar-track" title="{{ $item->total }} prestasi pada tahun {{ $item->tahun }}">
                                             <div class="trend-bar" style="height: {{ max(5, $tinggiBar) }}%"></div>

@@ -1572,6 +1572,15 @@
 </div>
 
 <script>
+    function confirmDeleteUser(actionUrl, userName) {
+        const modal = document.getElementById('modalDelete');
+        const targetName = document.getElementById('deleteTargetUserName');
+        const form = document.getElementById('formDeleteUser');
+        if (targetName) targetName.textContent = userName || 'pengguna ini';
+        if (form) form.action = actionUrl;
+        if (modal) modal.classList.add('show');
+    }
+
     function closeModal(id) {
         document.getElementById(id).classList.remove('show');
     }

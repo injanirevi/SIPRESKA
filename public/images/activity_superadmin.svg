@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 820" width="100%" height="100%" style="background:#ffffff; font-family:'Plus Jakarta Sans', Arial, sans-serif;">
+  <defs>
+    <!-- Arrow marker default -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2D1B4E" />
+    </marker>
+    <!-- Arrow marker red -->
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#EF4444" />
+    </marker>
+    <!-- Arrow marker green -->
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10B981" />
+    </marker>
+    <!-- Filter shadow -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="475" y="32" text-anchor="middle" font-size="18" font-weight="bold" fill="#2D1B4E">Activity Diagram: Manajemen Akun &amp; Kontrol Hak Akses (Super Admin)</text>
+
+  <!-- Outer Boundary Container -->
+  <rect x="25" y="55" width="900" height="740" rx="8" fill="#FFFFFF" stroke="#8A63D2" stroke-width="2.5"/>
+
+  <!-- Divider Line Between Swimlanes -->
+  <line x1="475" y1="55" x2="475" y2="795" stroke="#8A63D2" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Swimlane Headers -->
+  <rect x="25" y="55" width="450" height="42" fill="#FAF7FD" stroke="#8A63D2" stroke-width="2"/>
+  <text x="250" y="82" text-anchor="middle" font-size="15" font-weight="bold" fill="#2D1B4E">Super Admin (Aktor)</text>
+
+  <rect x="475" y="55" width="450" height="42" fill="#FAF7FD" stroke="#8A63D2" stroke-width="2"/>
+  <text x="700" y="82" text-anchor="middle" font-size="15" font-weight="bold" fill="#2D1B4E">Sistem &amp; Database SIPRESKA</text>
+
+  <!-- ==================== LEFT COLUMN: SUPER ADMIN ==================== -->
+
+  <!-- Initial Node -->
+  <circle cx="250" cy="130" r="14" fill="#2D1B4E"/>
+  
+  <!-- Arrow: Initial -> Login -->
+  <line x1="250" y1="144" x2="250" y2="175" stroke="#2D1B4E" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- Action: Login & Buka Menu -->
+  <rect x="135" y="175" width="230" height="50" rx="8" fill="#FFFFFF" stroke="#5B3A8E" stroke-width="1.8" filter="url(#shadow)"/>
+  <text x="250" y="196" text-anchor="middle" font-size="12" font-weight="600" fill="#2D1B4E">Login &amp; Akses Halaman</text>
+  <text x="250" y="213" text-anchor="middle" font-size="12" font-weight="600" fill="#2D1B4E">Manajemen Akun (/users)</text>
+
+  <!-- Arrow: Login -> Decision -->
+  <line x1="250" y1="225" x2="250" y2="260" stroke="#2D1B4E" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- Decision: Pilih Tindakan -->
+  <polygon points="250,260 330,295 250,330 170,295" fill="#FEF9C3" stroke="#CA8A04" stroke-width="1.8" filter="url(#shadow)"/>
+  <text x="250" y="292" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#854D0E">Pilih Tindakan</text>
+  <text x="250" y="306" text-anchor="middle" font-size="11" font-weight="bold" fill="#854D0E">Kelola Akun?</text>
+
+  <!-- 4 Action Boxes under Decision -->
+
+  <!-- Action 1: Tambah Pengguna -->
+  <rect x="45" y="380" width="185" height="52" rx="7" fill="#FFFFFF" stroke="#5B3A8E" stroke-width="1.6" filter="url(#shadow)"/>
+  <text x="137" y="402" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#2D1B4E">1. Tambah Pengguna Baru</text>
+  <text x="137" y="419" text-anchor="middle" font-size="10.5" fill="#4B5563">Input Data, NIM/NIP &amp; Role</text>
+
+  <!-- Action 2: Edit Pengguna -->
+  <rect x="260" y="380" width="185" height="52" rx="7" fill="#FFFFFF" stroke="#5B3A8E" stroke-width="1.6" filter="url(#shadow)"/>
+  <text x="352" y="402" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#2D1B4E">2. Edit Profil Pengguna</text>
+  <text x="352" y="419" text-anchor="middle" font-size="10.5" fill="#4B5563">Perbarui Data / Ubah Role</text>
+
+  <!-- Action 3: Reset Kata Sandi -->
+  <rect x="45" y="470" width="185" height="52" rx="7" fill="#FFFFFF" stroke="#5B3A8E" stroke-width="1.6" filter="url(#shadow)"/>
+  <text x="137" y="492" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#2D1B4E">3. Reset Kata Sandi</text>
+  <text x="137" y="509" text-anchor="middle" font-size="10.5" fill="#4B5563">Masukkan Password Baru</text>
+
+  <!-- Action 4: Hapus Akun -->
+  <rect x="260" y="470" width="185" height="52" rx="7" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.6" filter="url(#shadow)"/>
+  <text x="352" y="492" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#991B1B">4. Hapus Akun</text>
+  <text x="352" y="509" text-anchor="middle" font-size="10.5" fill="#7F1D1D">Konfirmasi Modal Hapus</text>
+
+  <!-- Branches from Decision to 4 boxes -->
+  <!-- To Tambah -->
+  <path d="M 210 312 L 137 345 L 137 380" fill="none" stroke="#2D1B4E" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <!-- To Edit -->
+  <path d="M 290 312 L 352 345 L 352 380" fill="none" stroke="#2D1B4E" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <!-- To Reset -->
+  <path d="M 170 295 L 90 295 L 90 470" fill="none" stroke="#2D1B4E" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <!-- To Hapus -->
+  <path d="M 330 295 L 410 295 L 410 470" fill="none" stroke="#EF4444" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+
+
+  <!-- ==================== RIGHT COLUMN: SISTEM & DATABASE ==================== -->
+
+  <!-- System Action 1: Validasi Keunikan -->
+  <rect x="575" y="380" width="250" height="52" rx="7" fill="#FAF7FD" stroke="#5B3A8E" stroke-width="1.8" filter="url(#shadow)"/>
+  <text x="700" y="402" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#2D1B4E">Validasi Keunikan Data</text>
+  <text x="700" y="419" text-anchor="middle" font-size="10.5" fill="#4B5563">Cek keunikan Email &amp; NIM/NIP</text>
+
+  <!-- Connections from Tambah & Edit to Validasi -->
+  <path d="M 445 406 L 575 406" fill="none" stroke="#2D1B4E" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- System Action 2: Enkripsi & Simpan MySQL -->
+  <rect x="575" y="470" width="250" height="52" rx="7" fill="#FAF7FD" stroke="#5B3A8E" stroke-width="1.8" filter="url(#shadow)"/>
+  <text x="700" y="492" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#2D1B4E">Enkripsi Password (Bcrypt)</text>
+  <text x="700" y="509" text-anchor="middle" font-size="10.5" fill="#4B5563">&amp; Perbarui Basis Data MySQL</text>
+
+  <!-- Arrow Validasi -> Enkripsi -->
+  <line x1="700" y1="432" x2="700" y2="470" stroke="#2D1B4E" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <!-- Connection from Reset -> Enkripsi -->
+  <path d="M 230 496 L 575 496" fill="none" stroke="#2D1B4E" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- System Action 3: Cek Keamanan Hapus -->
+  <rect x="575" y="560" width="250" height="52" rx="7" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.8" filter="url(#shadow)"/>
+  <text x="700" y="582" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#991B1B">Otorisasi Keamanan Akun</text>
+  <text x="700" y="599" text-anchor="middle" font-size="10.5" fill="#7F1D1D">Cegah hapus akun Super Admin aktif</text>
+
+  <!-- Connection from Hapus -> Cek Keamanan -->
+  <path d="M 445 496 L 500 496 L 500 586 L 575 586" fill="none" stroke="#EF4444" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+
+  <!-- System Action 4: Tampilkan Notifikasi & Refresh -->
+  <rect x="575" y="650" width="250" height="52" rx="7" fill="#D1FAE5" stroke="#10B981" stroke-width="1.8" filter="url(#shadow)"/>
+  <text x="700" y="672" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#065F46">Notifikasi Berhasil</text>
+  <text x="700" y="689" text-anchor="middle" font-size="10.5" fill="#047857">Tampilkan pesan &amp; refresh tabel</text>
+
+  <!-- Arrows into Notifikasi -->
+  <path d="M 700 522 L 700 650" fill="none" stroke="#10B981" stroke-width="1.6" marker-end="url(#arrow-green)"/>
+  <path d="M 700 612 L 700 650" fill="none" stroke="#10B981" stroke-width="1.6" marker-end="url(#arrow-green)"/>
+
+  <!-- Arrow Notifikasi -> Final State -->
+  <line x1="700" y1="702" x2="700" y2="738" stroke="#10B981" stroke-width="1.8" marker-end="url(#arrow-green)"/>
+
+  <!-- Final Node (End State) -->
+  <circle cx="700" cy="752" r="14" fill="#FFFFFF" stroke="#065F46" stroke-width="2.5"/>
+  <circle cx="700" cy="752" r="8" fill="#10B981"/>
+
+</svg>

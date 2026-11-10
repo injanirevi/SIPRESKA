@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="SIPRESKA">
   <diagram id="flowchart-sipreska-diagram" name="Flowchart Bisnis SIPRESKA">
-    <mxGraphModel dx="1094" dy="649" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1360" pageHeight="1020" math="0" shadow="0">
+    <mxGraphModel dx="1532" dy="908" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1360" pageHeight="1020" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -67,7 +67,7 @@
             <mxPoint x="520" y="720.9999999999998" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="m_wait" parent="lane_sivitas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=1.5;fontSize=11.5;fontStyle=1;fontColor=#000000;" value="Status Pengajuan:&#xa;Menunggu Verifikasi" vertex="1">
+        <mxCell id="m_wait" parent="lane_sivitas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D97706;strokeWidth=1.5;fontSize=11.5;fontStyle=1;fontColor=#000000;" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;Status Pengajuan:&lt;br&gt;Menunggu Verifikasi&lt;/span&gt;" vertex="1">
           <mxGeometry height="42" width="200" x="80" y="700" as="geometry" />
         </mxCell>
         <mxCell id="YKlTxThB29P_cBSRCS0v-22" edge="1" parent="lane_sivitas" source="m_status_decide" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;">
@@ -302,7 +302,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p_decide_login" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEECEB;strokeColor=#EF4444;strokeWidth=1.5;fontSize=11;fontColor=#991B1B;" value="Ingin masuk&#xa;ke sistem?" vertex="1">
+        <mxCell id="p_decide_login" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEECEB;strokeColor=#EF4444;strokeWidth=1.5;fontSize=11;fontColor=#000000;" value="Ingin masuk&#xa;ke sistem?" vertex="1">
           <mxGeometry height="65" width="120" x="120" y="245" as="geometry" />
         </mxCell>
         <mxCell id="YKlTxThB29P_cBSRCS0v-9" edge="1" parent="1" source="p_katalog" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;" target="YKlTxThB29P_cBSRCS0v-1" value="">
