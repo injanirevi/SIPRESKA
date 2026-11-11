@@ -416,9 +416,16 @@ Route::get('/dashboard', function () {
     if ($user->role === 'mahasiswa') {
 
         $prestasiMahasiswa = Prestasi::whereHas(
-            'anggota.sivitas',
+            'anggota',
             function ($query) use ($user) {
-                $query->where('user_id', $user->id);
+                $query->where(function ($sub) use ($user) {
+                    $sub->whereHas('sivitas', function ($sivitasQuery) use ($user) {
+                        $sivitasQuery->where('user_id', $user->id);
+                    });
+                    if ($user->nim_nip) {
+                        $sub->orWhere('nim_nip', $user->nim_nip);
+                    }
+                });
             }
         );
 

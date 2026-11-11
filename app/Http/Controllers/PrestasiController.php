@@ -239,10 +239,17 @@ class PrestasiController extends Controller
                         });
                 });
         } elseif ($user && $user->role === 'mahasiswa') {
-            // Mahasiswa melihat semua status pengajuan yang melibatkan profilnya.
-            $query->whereHas('anggota.sivitas', function ($sivitasQuery) use ($user) {
-                $sivitasQuery->where('user_id', $user->id);
+            // Mahasiswa melihat semua status pengajuan yang melibatkan profil atau nomor identitasnya.
+            $query->whereHas('anggota', function ($anggotaQuery) use ($user) {
+                $anggotaQuery->where(function ($sub) use ($user) {
+                    $sub->whereHas('sivitas', function ($sivitasQuery) use ($user) {
+                        $sivitasQuery->where('user_id', $user->id);
+                    });
+                    if ($user->nim_nip) {
+                        $sub->orWhere('nim_nip', $user->nim_nip);
+                    }
                 });
+            });
         } else {
             // Pengunjung umum dapat menjelajahi prestasi semua sivitas yang disetujui.
             $query->where('status', 'disetujui');
@@ -675,14 +682,34 @@ class PrestasiController extends Controller
                         ->withInput();
                 }
 
-                $profilAnggota = Sivitas::with('user')
-                    ->whereHas('user', fn ($query) => $query->where('nim_nip', $nim))
-                    ->first();
+                $userAnggota = \App\Models\User::where('nim_nip', $nim)->first();
+
+                $profilAnggota = null;
+                if ($userAnggota) {
+                    $profilAnggota = Sivitas::where('user_id', $userAnggota->id)->first();
+                }
+                if (! $profilAnggota) {
+                    $profilAnggota = Sivitas::where('nama', $nama)->first();
+                }
+
+                // Jika anggota tim belum ada di tabel sivitas, buatkan record agar resmi tersimpan di database
+                if (! $profilAnggota) {
+                    $profilAnggota = Sivitas::create([
+                        'user_id' => $userAnggota?->id,
+                        'nama' => $nama,
+                        'jenis_sivitas' => 'mahasiswa',
+                        'program_studi' => $sivitas->program_studi ?: 'INFORMATIKA',
+                        'fakultas' => $sivitas->fakultas ?: 'ILMU TARBIYAH DAN KEGURUAN',
+                        'status' => 'aktif',
+                    ]);
+                } elseif ($userAnggota && ! $profilAnggota->user_id) {
+                    $profilAnggota->update(['user_id' => $userAnggota->id]);
+                }
 
                 $anggotaTim[] = [
-                    'nama' => $profilAnggota?->nama ?: $nama,
+                    'nama' => $profilAnggota->nama ?: $nama,
                     'nim_nip' => $nim,
-                    'sivitas_id' => $profilAnggota?->id,
+                    'sivitas_id' => $profilAnggota->id,
                 ];
             }
         }
@@ -762,6 +789,8 @@ class PrestasiController extends Controller
                     // Simpan pengaju utama.
                     $prestasi->anggota()->create([
                         'sivitas_id' => $sivitas->id,
+                        'nama' => $sivitas->nama,
+                        'nim_nip' => $user->nim_nip,
                         'peran' => 'pengaju',
                         'keterangan' => 'Pengaju prestasi',
                     ]);
