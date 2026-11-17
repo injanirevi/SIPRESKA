@@ -12,6 +12,7 @@ class Sivitas extends Model
 
     protected $fillable = [
         'user_id',
+        'nim',
         'nama',
         'email',
         'jenis_sivitas',

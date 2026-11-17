@@ -381,6 +381,11 @@ Route::view('/panduan', 'panduan')->name('panduan');
 |--------------------------------------------------------------------------
 */
 
+Route::get('/captcha', [
+    AuthController::class,
+    'captcha',
+])->name('captcha');
+
 Route::get('/login', [
     AuthController::class,
     'showLogin',

@@ -128,6 +128,90 @@
             border-radius: 10px;
         }
 
+        /* Captcha Security Check Container (AICIS Style) */
+        .captcha-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            border: 1px solid #D8D2E2;
+            border-radius: 10px;
+            background: #FFFFFF;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
+            gap: 10px;
+        }
+
+        .captcha-image-wrapper {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: #FFFFFF;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .captcha-image-wrapper img {
+            height: 52px;
+            max-width: 100%;
+            display: block;
+            object-fit: contain;
+            transition: transform 0.15s ease;
+        }
+
+        .captcha-image-wrapper:hover img {
+            transform: scale(1.02);
+        }
+
+        .btn-refresh-captcha {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            border: 1px solid #E2D9EE;
+            background: #FAF7FD;
+            color: #5B3A8E;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-refresh-captcha:hover {
+            background: #5B3A8E;
+            color: #FFFFFF;
+            border-color: #5B3A8E;
+            transform: rotate(35deg);
+        }
+
+        .password-toggle-wrapper {
+            position: relative;
+        }
+
+        .password-toggle-wrapper .form-control {
+            padding-right: 44px;
+        }
+
+        .btn-toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #718096;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        .btn-toggle-password:hover {
+            color: #5B3A8E;
+        }
+
         @media (max-width: 480px) {
             .login-card {
                 border-radius: 16px;
@@ -179,7 +263,7 @@
 
                     <div class="mb-3">
                         <label for="username" class="form-label">
-                            Username (NIM/NIP)
+                            Email Address / Username (NIM/NIP) <span class="text-danger">*</span>
                         </label>
 
                         <input
@@ -202,22 +286,88 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="password" class="form-label">
-                            Kata Sandi
-                        </label>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label for="password" class="form-label mb-0">
+                                Password <span class="text-danger">*</span>
+                            </label>
+                        </div>
 
+                        <div class="password-toggle-wrapper">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-control @error('password') is-invalid @enderror"
+                                autocomplete="current-password"
+                                placeholder="Masukkan password"
+                                required
+                            >
+                            <button
+                                type="button"
+                                class="btn-toggle-password"
+                                onclick="togglePasswordVisibility()"
+                                aria-label="Tampilkan atau sembunyikan password"
+                                title="Lihat password"
+                            >
+                                <svg id="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+
+                        @error('password')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <!-- SECURITY CHECK / CAPTCHA (Ala AICIS UINSSC) -->
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label class="form-label mb-0" style="font-weight: 600;">
+                                Security Check <span class="text-danger">*</span>
+                            </label>
+                            <span class="text-muted" style="font-size: 11.5px;">Klik untuk ganti</span>
+                        </div>
+
+                        <div class="captcha-box mb-2">
+                            <div class="captcha-image-wrapper" onclick="refreshCaptcha()" title="Klik untuk memuat kode baru">
+                                <img
+                                    id="captcha-image"
+                                    src="{{ route('captcha') }}?v={{ time() }}"
+                                    alt="Security Captcha"
+                                >
+                            </div>
+                            <button
+                                type="button"
+                                class="btn-refresh-captcha"
+                                onclick="refreshCaptcha()"
+                                title="Ganti kode captcha"
+                                aria-label="Ganti kode captcha"
+                            >
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <label for="captcha" class="form-label mb-1" style="font-size: 13.5px; font-weight: 500;">
+                            Enter Captcha <span class="text-danger">*</span>
+                        </label>
                         <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            class="form-control @error('password') is-invalid @enderror"
-                            autocomplete="current-password"
-                            placeholder="Masukkan kata sandi"
+                            type="text"
+                            id="captcha"
+                            name="captcha"
+                            class="form-control @error('captcha') is-invalid @enderror"
+                            placeholder="Type the code above"
+                            autocomplete="off"
                             required
                         >
 
-                        @error('password')
-                            <div class="invalid-feedback">
+                        @error('captcha')
+                            <div class="invalid-feedback d-block">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -234,12 +384,12 @@
                         >
 
                         <label class="form-check-label" for="remember">
-                            Ingat saya
+                            Remember me
                         </label>
                     </div>
 
                     <button type="submit" class="btn btn-brand w-100">
-                        Masuk
+                        Sign in
                     </button>
                 </form>
 
@@ -252,6 +402,28 @@
             </div>
         </section>
     </main>
+
+    <script>
+        function refreshCaptcha() {
+            var img = document.getElementById('captcha-image');
+            if (img) {
+                img.src = '{{ route('captcha') }}?v=' + Date.now();
+            }
+        }
+
+        function togglePasswordVisibility() {
+            var passInput = document.getElementById('password');
+            var eyeIcon = document.getElementById('eye-icon');
+            if (!passInput || !eyeIcon) return;
+
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                eyeIcon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+            } else {
+                passInput.type = 'password';
+                eyeIcon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+            }
+        }
+    </script>
 </body>
 </html>
-

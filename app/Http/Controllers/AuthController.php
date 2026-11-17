@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -22,12 +23,87 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    /**
+     * Menghasilkan gambar Captcha SVG bergaya AICIS UINSSC
+     */
+    public function captcha(Request $request): Response
+    {
+        $pool = '23456789bcdfghjkmnpqrstvwxyz';
+        $code = '';
+        $length = 4;
+        for ($i = 0; $i < $length; $i++) {
+            $code .= $pool[random_int(0, strlen($pool) - 1)];
+        }
+
+        $request->session()->put('login_captcha', $code);
+
+        $width = 220;
+        $height = 65;
+
+        $charPositions = [
+            ['x' => 38, 'y' => 45, 'rot' => random_int(-5, 5)],
+            ['x' => 84, 'y' => 43, 'rot' => random_int(-5, 5)],
+            ['x' => 132, 'y' => 46, 'rot' => random_int(-5, 5)],
+            ['x' => 178, 'y' => 44, 'rot' => random_int(-5, 5)],
+        ];
+
+        $line1Y1 = random_int(22, 48);
+        $line1Y2 = random_int(18, 42);
+        $line2Y1 = random_int(28, 52);
+        $line2Y2 = random_int(16, 36);
+
+        $svgChars = '';
+        for ($i = 0; $i < $length; $i++) {
+            $char = htmlspecialchars($code[$i], ENT_QUOTES, 'UTF-8');
+            $pos = $charPositions[$i];
+            $svgChars .= sprintf(
+                '<text x="%d" y="%d" font-family="Arial, -apple-system, BlinkMacSystemFont, sans-serif" font-size="38" font-weight="700" fill="#1b633d" text-anchor="middle" transform="rotate(%d %d %d)">%s</text>',
+                $pos['x'], $pos['y'], $pos['rot'], $pos['x'], $pos['y'], $char
+            );
+        }
+
+        $svg = <<<SVG
+<svg xmlns="http://www.w3.org/2000/svg" width="{$width}" height="{$height}" viewBox="0 0 {$width} {$height}">
+    <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+    <!-- Noise / strike-through lines ala AICIS -->
+    <line x1="8" y1="{$line1Y1}" x2="212" y2="{$line1Y2}" stroke="#d63384" stroke-width="2.2" stroke-linecap="round" opacity="0.75" />
+    <line x1="15" y1="{$line2Y1}" x2="205" y2="{$line2Y2}" stroke="#5b3a8e" stroke-width="1.6" stroke-linecap="round" opacity="0.35" />
+    {$svgChars}
+</svg>
+SVG;
+
+        return response($svg, 200, [
+            'Content-Type' => 'image/svg+xml',
+            'Cache-Control' => 'no-cache, no-store, must-revalidate',
+            'Pragma' => 'no-cache',
+            'Expires' => '0',
+        ]);
+    }
+
     public function login(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             'username' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string'],
+            'captcha'  => ['required', 'string'],
+        ], [
+            'captcha.required' => 'Kode keamanan captcha wajib diisi.',
         ]);
+
+        // Verifikasi Captcha
+        $sessionCaptcha = (string) $request->session()->get('login_captcha');
+        $userCaptcha = strtolower(trim((string) $request->input('captcha')));
+
+        if ($sessionCaptcha === '' || $userCaptcha !== $sessionCaptcha) {
+            $request->session()->forget('login_captcha');
+
+            return back()
+                ->withErrors(['captcha' => 'Kode captcha tidak cocok atau telah kedaluwarsa. Silakan ketik kembali kode yang baru.'])
+                ->onlyInput('username');
+        }
+
+        // Hapus kode captcha yang sudah digunakan
+        $request->session()->forget('login_captcha');
 
         $username = trim($credentials['username']);
         $remember = $request->boolean('remember');
@@ -220,6 +296,7 @@ class AuthController extends Controller
                     }
 
                     $profileData = [
+                        'nim' => $username,
                         'nama' => $displayName,
                         'email' => $portalEmail && ! $emailOwner
                             ? $portalEmail

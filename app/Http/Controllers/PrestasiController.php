@@ -696,14 +696,24 @@ class PrestasiController extends Controller
                 if (! $profilAnggota) {
                     $profilAnggota = Sivitas::create([
                         'user_id' => $userAnggota?->id,
+                        'nim' => $nim,
                         'nama' => $nama,
                         'jenis_sivitas' => 'mahasiswa',
                         'program_studi' => $sivitas->program_studi ?: 'INFORMATIKA',
                         'fakultas' => $sivitas->fakultas ?: 'ILMU TARBIYAH DAN KEGURUAN',
                         'status' => 'aktif',
                     ]);
-                } elseif ($userAnggota && ! $profilAnggota->user_id) {
-                    $profilAnggota->update(['user_id' => $userAnggota->id]);
+                } else {
+                    $updates = [];
+                    if ($userAnggota && ! $profilAnggota->user_id) {
+                        $updates['user_id'] = $userAnggota->id;
+                    }
+                    if (! $profilAnggota->nim && $nim) {
+                        $updates['nim'] = $nim;
+                    }
+                    if (! empty($updates)) {
+                        $profilAnggota->update($updates);
+                    }
                 }
 
                 $anggotaTim[] = [

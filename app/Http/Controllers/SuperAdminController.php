@@ -124,6 +124,7 @@ class SuperAdminController extends Controller
             } else {
                 Sivitas::create([
                     'user_id' => $user->id,
+                    'nim' => $user->nim_nip,
                     'nama' => $validated['nama'],
                     'email' => $validated['email'],
                     'jenis_sivitas' => $validated['role'],
@@ -184,6 +185,7 @@ class SuperAdminController extends Controller
             } else {
                 if ($user->sivitas) {
                     $user->sivitas->update([
+                        'nim' => $user->nim_nip,
                         'nama' => $validated['nama'],
                         'email' => $validated['email'],
                         'jenis_sivitas' => $validated['role'],
@@ -195,6 +197,7 @@ class SuperAdminController extends Controller
                 } else {
                     Sivitas::create([
                         'user_id' => $user->id,
+                        'nim' => $user->nim_nip,
                         'nama' => $validated['nama'],
                         'email' => $validated['email'],
                         'jenis_sivitas' => $validated['role'],

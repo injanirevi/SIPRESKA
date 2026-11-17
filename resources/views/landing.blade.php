@@ -197,12 +197,17 @@
             <a href="{{ route('prestasi.publik.rincian', ['prestasi' => $prestasi, 'kembali' => request()->getRequestUri()]) }}" class="recent-card recent-card-link">
                 @include('prestasi._bukti-foto', ['prestasi' => $prestasi])
 
-                <span class="mini-badge">
+                <div class="recent-card-meta-bar">
+                    <span class="recent-card-rank-badge {{ $loop->iteration <= 3 ? 'rank-podium-' . $loop->iteration : '' }}">
+                        #{{ $loop->iteration }}
+                    </span>
+                    <span class="mini-badge">
                     {{ $prestasi->tingkat?->nama_tingkat
                         ?? $prestasi->tingkat?->nama
                         ?? $prestasi->tingkat?->tingkat
                         ?? 'Tingkat belum diisi' }}
                 </span>
+                </div>
 
                 <h3>{{ $prestasi->nama_prestasi }}</h3>
 
@@ -281,12 +286,17 @@
             <a href="{{ route('prestasi.publik.rincian', ['prestasi' => $prestasi, 'kembali' => request()->getRequestUri()]) }}" class="recent-card recent-card-link">
                 @include('prestasi._bukti-foto', ['prestasi' => $prestasi])
 
-                <span class="mini-badge">
+                <div class="recent-card-meta-bar">
+                    <span class="recent-card-rank-badge {{ $loop->iteration <= 3 ? 'rank-podium-' . $loop->iteration : '' }}">
+                        #{{ $loop->iteration }}
+                    </span>
+                    <span class="mini-badge">
                     {{ $prestasi->tingkat?->nama_tingkat
                         ?? $prestasi->tingkat?->nama
                         ?? $prestasi->tingkat?->tingkat
                         ?? 'Tingkat belum diisi' }}
                 </span>
+                </div>
 
                 <h3>{{ $prestasi->nama_prestasi }}</h3>
 
@@ -468,12 +478,17 @@
             <a href="{{ route('prestasi.publik.rincian', ['prestasi' => $prestasi, 'kembali' => request()->getRequestUri()]) }}" class="recent-card recent-card-link">
                 @include('prestasi._bukti-foto', ['prestasi' => $prestasi])
 
-                <span class="mini-badge">
+                <div class="recent-card-meta-bar">
+                    <span class="recent-card-rank-badge {{ $loop->iteration <= 3 ? 'rank-podium-' . $loop->iteration : '' }}">
+                        #{{ $loop->iteration }}
+                    </span>
+                    <span class="mini-badge">
                     {{ $prestasi->tingkat?->nama_tingkat
                         ?? $prestasi->tingkat?->nama
                         ?? $prestasi->tingkat?->tingkat
                         ?? 'Tingkat belum diisi' }}
                 </span>
+                </div>
 
                 <h3>{{ $prestasi->nama_prestasi }}</h3>
 
@@ -522,4 +537,48 @@
 </section>
 
 
+
+<style>
+.recent-card-meta-bar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    margin-top: 10px !important;
+    margin-bottom: 4px !important;
+}
+.recent-card-meta-bar .mini-badge {
+    margin-top: 0 !important;
+}
+.recent-card-rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: #5B3A8E;
+    background: #F3EDF9;
+    border: 1px solid #E4D7F5;
+}
+.recent-card-rank-badge.rank-podium-1 {
+    background: linear-gradient(135deg, #FFDF00 0%, #E6A100 100%) !important;
+    color: #4A3300 !important;
+    border-color: #D49B00 !important;
+    box-shadow: 0 2px 8px rgba(230, 161, 0, 0.3) !important;
+}
+.recent-card-rank-badge.rank-podium-2 {
+    background: linear-gradient(135deg, #F1F5F9 0%, #CBD5E1 100%) !important;
+    color: #1E293B !important;
+    border-color: #94A3B8 !important;
+    box-shadow: 0 2px 8px rgba(148, 163, 184, 0.25) !important;
+}
+.recent-card-rank-badge.rank-podium-3 {
+    background: linear-gradient(135deg, #FFEDD5 0%, #FB923C 100%) !important;
+    color: #7C2D12 !important;
+    border-color: #EA580C !important;
+    box-shadow: 0 2px 8px rgba(234, 88, 12, 0.25) !important;
+}
+</style>
 @endsection
